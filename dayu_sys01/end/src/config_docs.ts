@@ -11,8 +11,7 @@ export function config_docs(app: any, port: number) {
         .setDescription(`${name}-${version} API description`)
         .setVersion(version)
         .addServer(`http://localhost:${port}/`, 'Local environment')
-        .addTag('GroupA', '第一组 API')
-        .addTag('GroupB', '第二组 API')
+
         .addApiKey({
             type: 'apiKey',
             name: 'Authorization', // 请求头名称
@@ -20,13 +19,11 @@ export function config_docs(app: any, port: number) {
         })
 
         .addApiKey({
-                type: 'http',
-                scheme: 'bearer',
+                type: 'apiKey',
                 name: 'token', // 请求头名称
-                in: 'header',
-
+                in: 'header'
             }
-            , 'token')
+            ,  'token')
         .addBearerAuth(
             {
                 type: 'http',
@@ -41,31 +38,8 @@ export function config_docs(app: any, port: number) {
         .build();
 
 
+
     const document = SwaggerModule.createDocument(app, config);
-
-    console.log(`111---document:`, Object.keys(document))
-    // console.log(`111---document:`,document.components.securitySchemes.token)
-    // 设置默认请求头
-    // document.components?.securitySchemes?.token?.default = 'your-default-token-here';
-
-    if(document.components?.securitySchemes?.token){
-        document.components.securitySchemes.token['default'] = 'your-default-token-here';
-    }
-
-
-    // 手动添加全局请求头
-    document.components = document.components || {};
-    document.components.parameters = {
-        ...document.components.parameters,
-        AaaXRequestID: {
-            name: 'AaaXRequestID',
-            in: 'header',
-            description: '请求唯一标识',
-            required: false,
-            schema: { type: 'string' },
-        },
-    };
-
     SwaggerModule.setup('/api/swagger', app, document);
     knife4jSetup(app, [
         {
