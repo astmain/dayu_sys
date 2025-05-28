@@ -3,7 +3,7 @@ import {ApiProperty} from "@nestjs/swagger";
 
 // 新增
 class create {
-    @ApiProperty({description: '商品名称', default: '',example: '商品名称111example', type: String})
+    @ApiProperty({description: '商品名称', default: '', example: '商品名称111example', type: String})
     @Length(0, 100, {message: '商品名称-必须在$constraint1到$constraint2个字符之间',})
     @IsNotEmpty({message: '商品名称-不能为空'})
     @IsString()
@@ -53,10 +53,4 @@ export {
     update,
     find
 }
-
-
-
-
-
-
 
