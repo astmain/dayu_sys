@@ -1,0 +1,105 @@
+// D:\AAA\dayu_system_01\api_end\prisma\dev.db          公司
+// E:\AAA\dayu_system\dayu02_end\prisma\dev.db           在家
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  // url      = "file:C:/db_dev_sqlited.db"
+  // url      = "file:D:/db_dev_sqlited.db"
+  url      = "file:./db_dev_sqlited.db"
+}
+
+// model tb_role {
+//   id     Int    @id @default(autoincrement())
+//   name   String
+//   remark String @default("")
+//
+//   // depart_id Int
+//   // tb_depart tb_depart @relation(fields: [depart_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+//   //
+//
+//   menu_id Int     @default(0)
+//   role_id Int     @default(0)
+//   uuid    String  @default(uuid())
+//   create  Boolean @default(false)
+//   delete  Boolean @default(false)
+//   update  Boolean @default(false)
+//   find    Boolean @default(false)
+//   view    Boolean @default(false)
+// }
+
+model tb_permiss {
+  id        Int     @id @default(autoincrement())
+  menu_id   Int     @default(0)
+  depart_id Int     @default(0)
+  uuid      String  @default(uuid())
+  create    Boolean @default(false)
+  delete    Boolean @default(false)
+  update    Boolean @default(false)
+  find      Boolean @default(false)
+  view      Boolean @default(false)
+}
+
+model tb_depart {
+  id        Int     @id @default(autoincrement())
+  name      String
+  remark    String  @default("")
+  is_depart Boolean @default(true)
+
+  parent_id Int? // 关联自身
+  parent    tb_depart?  @relation("children", fields: [parent_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  children  tb_depart[] @relation("children")
+  user_id   Int         @default(0) // 外键
+  tb_user   tb_user[]   @relation("UserDepartRelation") // 反向关联字段名
+}
+
+// https://www.doubao.com/thread/w936b86d7f118de51
+// https://lxblog.com/qianwen/share?shareId=9e9d117d-b2b3-48dd-8ce6-6b758c7b4b10
+model tb_user {
+  id           Int            @id @default(autoincrement())
+  tel          String         @unique
+  password     String         @default("123456")
+  username     String         @default("")
+  remark       String         @default("")
+  tb_depart    tb_depart[]    @relation("UserDepartRelation") // 正向关联字段名
+  tb_static    tb_static[]    @relation("ref_static_user") // 正向关联字段名
+  tb_goods_car tb_goods_car[] @relation("ref_tb_user_tb_goods_car") // 正向关联字段名
+}
+
+model tb_menu {
+  id   Int    @id @default(autoincrement())
+  menu String @default("")
+  path String @default("")
+
+  // 自关联
+  parent_id Int @default(0)
+  // parent    tb_menu?  @relation("tb_menu_children", fields: [parent_id], references: [id])
+  // children  tb_menu[] @relation("tb_menu_children")
+}
+
+model tb_static {
+  id        Int       @id @default(autoincrement())
+  name      String    @default("")
+  path      String    @default("")
+  type      String    @default("")
+  size      Int       @default(0)
+  createdAt DateTime  @default(now())
+  url       String    @default("")
+  user_id   Int       @default(0) // 外键
+  tb_user   tb_user[] @relation("ref_static_user") // 反向关联字段名
+}
+
+model tb_goods_car {
+  id        Int       @id @default(autoincrement())
+  name      String    @default("")
+  path      String    @default("")
+  type      String    @default("")
+  size      Int       @default(0)
+  createdAt DateTime  @default(now())
+  url       String    @default("")
+  user_id   Int       @default(0) // 外键
+  tb_user   tb_user[] @relation("ref_tb_user_tb_goods_car") // 反向关联字段名
+}

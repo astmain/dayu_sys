@@ -1,0 +1,41 @@
+ul.css_toolbar1 {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 2px;
+    padding: 0px;
+    gap: 8px;
+  
+    li {
+      display: flex;
+  
+    }
+  
+    title {
+      box-sizing: border-box;
+      background: #f5f7fa;
+      color: #909399;
+  
+  
+      height: 100%;
+      font-size: 12px;
+  
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  
+      border: 1px solid #dcdfe6;
+      border-radius: 4px 0px 0px 4px;
+      border-right: 0px;
+  
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  
+    .el-input__wrapper {
+      border-radius: 0px 4px 4px 0px !important;
+    }
+  
+    .el-button {
+      margin: 0px !important;
+    }
+  }
