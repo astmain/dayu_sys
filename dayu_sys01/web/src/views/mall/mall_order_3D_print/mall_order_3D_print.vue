@@ -8,8 +8,7 @@
           <div>拖拽文件到这里上传</div>
           <input class="file_input" type="file" @change="on_change_file_111" accept=".stl,.png" style="display: none"/>
         </div>
-        <canvas class="canvasContainer"
-                style="  width: 100%;  height: 300px;  border: 1px solid red;  box-sizing: border-box;"/>
+        <canvas class="canvasContainer" style="width:100%; height: 300px;border:1px solid red;box-sizing: border-box;"/>
       </nav>
       <nav>
         <span @click="file_upload_find_list()">历史上传记录</span>
@@ -41,7 +40,9 @@
         <span @click="goods_car_find_list()">购物车</span>
         <div class="aaa111" style="display: flex;flex-direction: column ;gap: 4px ;  width:100% ; font-size: 14px">
           <div v-for="(item, i) in goods_car_list" style="">
-            <div style="display: flex;flex-direction: column ;gap: 4px ;">
+            <div style="display: flex;flex-direction: column ;gap: 4px ;padding: 4px"
+
+                 @click="goods_car_curr.highlight=item.id" :class="{'highlight':goods_car_curr.highlight===item.id}">
               <div style="display: flex;gap: 2px;">
                 <img :src="item.img_url" alt="" style="width:50px;height: 50px">
                 <div style="display: flex;gap: 2px; flex-direction: column;width:100%;">
@@ -51,7 +52,7 @@
                       <span> {{ item.name }}</span>
                     </span>
                     <div>
-                      <el-button @click="" plain type="">修改规格</el-button>
+                      <el-button @click="()=>(goods_car_curr.show=true,goods_car_curr.data=item)" plain type="">修改规格</el-button>
                       <el-button @click="goods_car_del(item.id)" plain type="">删除</el-button>
                     </div>
 
@@ -88,9 +89,30 @@
         </ul>
         <el-button type="primary" @click="">提交订单</el-button>
       </nav>
-
-
     </el-card>
+
+
+    <el-dialog v-model="goods_car_curr.show" title="修改规格" width="500px" draggable>
+      <el-form :model="goods_car_curr.data" label-width="80px">
+        <el-form-item label="数量">
+          <el-input-number v-model="goods_car_curr.data.num" :min="0" :max="99999" @change="num_change(goods_car_curr.data)"/>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
+
+
+    <!--
+
+          <ElDialog v-model={show} title={props.title} width="500px" draggable>
+            <ElForm model={form} >
+              <ElFormItem label="新增-组织" prop='position'>
+                <ElInput v-model={form.depart} />
+              </ElFormItem>
+            </ElForm>
+            <ElButton type="primary" onclick={async () => { submit() }}  >确定</ElButton>
+          </ElDialog>
+
+    -->
 
 
   </div>
@@ -107,6 +129,12 @@ export default {
     return {
       file_upload_list: [],
       goods_car_list: [],
+      goods_car_curr: {
+        show: false,
+        highlight: null,
+        data: {},
+
+      }
 
     };
   },
@@ -244,6 +272,7 @@ export default {
     this.file_upload_find_list()
     this.handle_file_drop()
     this.goods_car_find_list()
+    window.c = this.goods_car_curr
 
   }
 };
@@ -264,5 +293,9 @@ export default {
 
 .file_area.hover {
   color: red;
+}
+
+.highlight {
+  background: #ecf5ff;
 }
 </style>

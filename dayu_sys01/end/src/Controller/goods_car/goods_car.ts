@@ -18,31 +18,31 @@ export class goods_car {
     }
 
     @Post('goods_car_create')
-    @ApiOperation({summary: '新增购物车'})
+    @ApiOperation({summary: '新增-购物车'})
     async create(@Body() body: goods_car_TDO.create, @Req() req) {
         console.log(`111---body:`, body);
         body["user_id"] = req.user.id
         body['price'] = this.tools.price_1_make({num: body.num, price_base: 100})
         await this.db.tb_goods_car.create({data: body})
-        return {code: 200, count: 1, msg: '成功:新增购物车'};
+        return {code: 200, count: 1, msg: '成功:新增-购物车'};
     }
 
     @Post('goods_car_del')
-    @ApiOperation({summary: '删除购物车'})
+    @ApiOperation({summary: '删除-购物车'})
     async del(@Body() body: goods_car_TDO.del) {
         console.log(`goods_car_del---body:`, body);
         await this.db.tb_goods_car.delete({where: {id: body.id}})
-        return {code: 200, count: 1, msg: '成功:删除购物车'};
+        return {code: 200, count: 1, msg: '成功:删除-购物车'};
     }
 
     @Post('goods_car_update')
-    @ApiOperation({summary: '更新购物车'})
+    @ApiOperation({summary: '更新-购物车'})
     async update(@Body() body: goods_car_TDO.update, @Req() req) {
         console.log(`goods_car_update---body:`, body);
         body["user_id"] = req.user.id
         body['price'] = this.tools.price_1_make({num: body.num, price_base: 100})
         await this.db.tb_goods_car.update({where: {id: body.id}, data: body})
-        return {code: 200, count: 1, msg: '成功:更新购物车'};
+        return {code: 200, count: 1, msg: '成功:更新-购物车'};
     }
 
     @Post('goods_car_find_list')
@@ -50,14 +50,14 @@ export class goods_car {
     async find_list(@Body() body: goods_car_TDO.find, @Req() req) {
         console.log(`111---body:`, body);
         let list = await this.db.tb_goods_car.findMany({where: {user_id: req.user.id}})
-        return {code: 200, list, msg: '成功:查询购物车'};
+        return {code: 200, list, msg: '成功:查询-购物车-list'};
     }
 
     @Get('goods_car_find_one')
-    @ApiOperation({summary: '查询购物车-one'})
+    @ApiOperation({summary: '查询-购物车-one'})
     async find_one(@Body() body: goods_car_TDO.find) {
         console.log(`111---body:`, body);
-        return {code: 200, count: 1, msg: '成功:查询购物车'};
+        return {code: 200, count: 1, msg: '成功:查询-购物车-list'};
     }
 
 }

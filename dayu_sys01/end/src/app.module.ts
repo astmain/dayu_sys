@@ -29,6 +29,7 @@ import {file_upload_Module} from "./Controller/file_upload/file_upload_Module";
 import {tool_Module} from "./tool/tool_Module";
 import {tools_Module} from "./tools/tools_Module";
 import {goods_car_Module} from "./Controller/goods_car/goods_car_Module";
+import {goods_order_Module} from "./Controller/goods_order/goods_order_Module";
 
 @Module({
 
@@ -46,6 +47,7 @@ import {goods_car_Module} from "./Controller/goods_car/goods_car_Module";
         // 资源文件模块
         file_upload_Module,
         goods_car_Module,
+        goods_order_Module,
         //
         //     全局模块,
         global_module.make_path({path: "/app.json"}),

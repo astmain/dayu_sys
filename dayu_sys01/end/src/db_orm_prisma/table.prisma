@@ -59,14 +59,17 @@ model tb_depart {
 // https://www.doubao.com/thread/w936b86d7f118de51
 // https://lxblog.com/qianwen/share?shareId=9e9d117d-b2b3-48dd-8ce6-6b758c7b4b10
 model tb_user {
-  id           Int            @id @default(autoincrement())
-  tel          String         @unique
-  password     String         @default("123456")
-  username     String         @default("")
-  remark       String         @default("")
-  tb_depart    tb_depart[]    @relation("UserDepartRelation") // 正向关联字段名
-  tb_static    tb_static[]    @relation("ref_static_user") // 正向关联字段名
-  tb_goods_car tb_goods_car[] @relation("ref_tb_user_tb_goods_car") // 正向关联字段名
+  id               Int             @id @default(autoincrement())
+  tel              String          @unique
+  password         String          @default("123456")
+  username         String          @default("")
+  remark           String          @default("")
+  tb_depart        tb_depart[]     @relation("UserDepartRelation") // 正向关联字段名
+  tb_static        tb_static[]     @relation("ref_static_user") // 正向关联字段名
+  tb_goods_car     tb_goods_car[]  @relation("ref_tb_user_tb_goods_car") // 正向关联字段名
+  tb_goods_order   tb_goods_order? @relation(fields: [tb_goods_orderId], references: [id])
+  tb_goods_orderId Int?
+  tb_goods_order   tb_goods_order? @relation(fields: [tb_goods_orderId], references: [id])
 }
 
 model tb_menu {
@@ -101,4 +104,17 @@ model tb_goods_car {
   createdAt DateTime  @default(now())
   user_id   Int       @default(0) // 外键
   tb_user   tb_user[] @relation("ref_tb_user_tb_goods_car") // 反向关联字段名
+}
+
+model tb_goods_order {
+  id        Int       @id @default(autoincrement())
+  name      String    @default("")
+  img_url   String    @default("")
+  price     Float     @default(0.0)
+  num       Int       @default(0)
+  status    Int       @default(0)
+  createdAt DateTime  @default(now())
+  user_id   Int       @default(0) // 外键
+  tb_user   tb_user[] @relation("ref_tb_user_tb_goods_car") // 反向关联字段名
+  tb_user   tb_user[]
 }
