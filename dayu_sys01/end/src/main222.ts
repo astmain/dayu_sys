@@ -10,8 +10,6 @@ import {Config_logger_global_middleware} from "./Config_logger_global_middleware
 import {Config_filter_response} from "./Config_filter_response"
 import {Config_filter_catch_error} from "./Config_filter_catch_error"
 import {config_globalThis} from "./config_globalThis";
-import {config_docs222} from "./config_docs222";
-import {DocumentBuilder, SwaggerModule} from "@nestjs/swagger";
 
 // declare global {
 //     var myGlobalConfig: {
@@ -21,33 +19,7 @@ import {DocumentBuilder, SwaggerModule} from "@nestjs/swagger";
 // }
 config_globalThis()
 globalThis.bbb = "bbb"
-export class AppModule222 {
-    configure(consumer) {}
 
-    static async createV1Document(app) {
-        const options = new DocumentBuilder()
-            .setTitle('API 文档 - V1')
-            .setDescription('API 描述 - V1')
-            .setVersion('1.0')
-            .addTag('GroupA', '第一组 API')
-            .build();
-
-        const document = SwaggerModule.createDocument(app, options);
-        SwaggerModule.setup('api-docs/v1', app, document);
-    }
-
-    static async createV2Document(app) {
-        const options = new DocumentBuilder()
-            .setTitle('API 文档 - V2')
-            .setDescription('API 描述 - V2')
-            .setVersion('2.0')
-            .addTag('GroupB', '第二组 API')
-            .build();
-
-        const document = SwaggerModule.createDocument(app, options);
-        SwaggerModule.setup('api-docs/v2', app, document);
-    }
-}
 
 async function bootstrap() {
     // 定义类型
@@ -73,16 +45,11 @@ async function bootstrap() {
     let path_static_store = join(process.cwd(), "..", 'static_store')
     // app_http.useStaticAssets(join(process.cwd(), 'static'), {prefix: "/static"})   //      http://127.0.0.1:10001/static/png.png
     app_http.useStaticAssets(path_static_store, {prefix: "/static_store"})   //      http://127.0.0.1:10001/static/png.png
-    // let main = config_docs(app_http, 10001)
-     // main = config_docs222(app_http, 10001)
+    let main = config_docs(app_http, 10001)
     // main.app.use(Config_logger_global_middleware)
     // main.app.useGlobalInterceptors(new Config_filter_response())
     // main.app.useGlobalFilters(new Config_filter_catch_error())
-
-    await AppModule222.createV1Document(app_http);
-    await AppModule222.createV2Document(app_http);
-
-    await app_http.listen(10001);
+    await main.app.listen(main.port);
 
 
     // 使用证书
