@@ -15,40 +15,40 @@ export class goods_car {
     constructor(@Inject("db_prisma") private db: any,) {
     }
 
-    @Post('goods_car_create')
-    @ApiOperation({summary: '新增购物车'})
+    @Post('create')
+    @ApiOperation({ summary: '新增发票' })
     create(@Body() body: goods_car_TDO.create) {
         console.log(`111---body:`, body);
-        return {code: 200, count: 1, message: '成功:新增发票'};
+        return { code: 200, count: 1, message: '成功:新增发票' };
     }
 
-    @Post('goods_car_del')
-    @ApiOperation({summary: '删除购物车'})
+    @Post('del')
+    @ApiOperation({ summary: '删除发片' })
     del(@Body() body: goods_car_TDO.del) {
         console.log(`111---body:`, body);
-        return {code: 200, count: 1, message: '成功:删除发片'};
+        return { code: 200, count: 1, message: '成功:删除发片' };
     }
 
-    @Post('goods_car_update')
-    @ApiOperation({summary: '更新购物车'})
+    @Post('update')
+    @ApiOperation({ summary: '更新发票' })
     update(@Body() body: goods_car_TDO.update) {
         // create(@Body() body: any) {
         console.log(`111---body:`, body);
-        return {code: 200, count: 1, message: '成功:更新发票'};
+        return { code: 200, count: 1, message: '成功:更新发票' };
     }
 
-    @Post('goods_car_find_list')
-    @ApiOperation({summary: '查询购物车-list'})
-    find_list(@Body() body: goods_car_TDO.find) {
+    @Post('list')
+    @ApiOperation({ summary: '查询发票list' })
+    list(@Body() body: goods_car_TDO.find) {
         console.log(`111---body:`, body);
-        return {code: 200, count: 1, message: '成功:查询发票list'};
+        return { code: 200, count: 1, message: '成功:查询发票list' };
     }
 
-    @Get('goods_car_find_one')
-    @ApiOperation({summary: '查询购物车-one'})
-    find_one(@Body() body: goods_car_TDO.find) {
+    @Get('one')
+    @ApiOperation({ summary: '查询发票one' })
+    one(@Body() body: goods_car_TDO.find) {
         console.log(`111---body:`, body);
-        return {code: 200, count: 1, message: '成功:查询发票one'};
+        return { code: 200, count: 1, message: '成功:查询发票one' };
     }
 
 }
