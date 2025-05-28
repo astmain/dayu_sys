@@ -95,11 +95,10 @@ model tb_static {
 model tb_goods_car {
   id        Int       @id @default(autoincrement())
   name      String    @default("")
-  path      String    @default("")
-  type      String    @default("")
-  size      Int       @default(0)
+  img_url   String    @default("")
+  price     Float     @default(0.0)
+  num       Int       @default(0)
   createdAt DateTime  @default(now())
-  url       String    @default("")
   user_id   Int       @default(0) // 外键
   tb_user   tb_user[] @relation("ref_tb_user_tb_goods_car") // 反向关联字段名
 }

@@ -205,6 +205,53 @@ async function delete_user({user_id}) {
     return
 }
 
+// 购物车=================================================
+export async function goods_car_create({name ,img_url,num}) {
+    let tag = "goods_car_create"
+    let config = {method: "post", url: "/goods_car/goods_car_create", data: {name ,img_url,num}}
+    console.log(tag, 'config:', config)
+    const res = await axios_api(config)
+    console.log(tag, 'res:', res)
+    res.code === 200 ? ElMessage.success({message: res.msg, duration: 1000, showClose: true}) : 0
+    return
+}
+
+async function goods_car_find_list(callback) {
+    let tag = "goods_car_find_list"
+    let config = {method: "post", url: "/goods_car/goods_car_find_list", data: {}}
+    console.log(tag, 'config:', config)
+    const res = await axios_api(config)
+    console.log(tag, 'res:', res)
+    res.code === 200 ? ElMessage.success({message: res.msg, duration: 1000, showClose: true}) : 0
+    if (callback)     callback(res)
+    return
+}
+
+
+
+async function goods_car_del({id}) {
+    let tag = "goods_car_del"
+    let config = {method: "post", url: "/goods_car/goods_car_del", data: {id}}
+    console.log(tag, 'config:', config)
+    const res = await axios_api(config)
+    console.log(tag, 'res:', res)
+    res.code === 200 ? ElMessage.success({message: res.msg, duration: 1000, showClose: true}) : 0
+    return
+}
+
+
+
+
+
+async function goods_car_update({name, img_url, num, id}) {
+    let tag = "goods_car_update"
+    let config = {method: "post", url: "/goods_car/goods_car_update", data: {name, img_url, num, id}}
+    console.log(tag, 'config:', config)
+    const res = await axios_api(config)
+    console.log(tag, 'res:', res)
+    res.code === 200 ? ElMessage.success({message: res.msg, duration: 1000, showClose: true}) : 0
+    return
+}
 
 let api = {
     // tb_depart: require("./tb_depart"),
@@ -244,6 +291,13 @@ let api = {
     update_user,
     find_user_by_depart_id,
     delete_user,
+
+    //购物车
+    goods_car_create,
+    goods_car_find_list,
+    goods_car_update,
+    goods_car_del,
+
 
 }
 

@@ -1,4 +1,4 @@
-import {Controller, Get, Post, Body, HttpException, HttpStatus, UseFilters, ParseIntPipe, Query, Inject} from '@nestjs/common';
+import {Controller, Get, Post, Body, HttpException, HttpStatus, UseFilters, ParseIntPipe, Query, Inject, Req} from '@nestjs/common';
 import {Put, Param, Delete, HttpCode} from '@nestjs/common';
 import {ParseArrayPipe} from '@nestjs/common/pipes/parse-array.pipe';
 import {ApiTags, ApiOperation, ApiResponse, ApiQuery} from '@nestjs/swagger';
@@ -12,43 +12,52 @@ import * as goods_car_TDO from './goods_car_TDO';
 @ApiBearerAuth('Authorization')
 @Controller("goods_car")
 export class goods_car {
-    constructor(@Inject("db_prisma") private db: any,) {
+    constructor(@Inject("db_prisma") private db: any,
+                @Inject("tools") private tools: any,
+    ) {
     }
 
     @Post('goods_car_create')
     @ApiOperation({summary: '新增购物车'})
-    create(@Body() body: goods_car_TDO.create) {
+    async create(@Body() body: goods_car_TDO.create, @Req() req) {
         console.log(`111---body:`, body);
-        return {code: 200, count: 1, message: '成功:新增发票'};
+        body["user_id"] = req.user.id
+        body['price'] = this.tools.price_1_make({num: body.num, price_base: 100})
+        await this.db.tb_goods_car.create({data: body})
+        return {code: 200, count: 1, msg: '成功:新增购物车'};
     }
 
     @Post('goods_car_del')
     @ApiOperation({summary: '删除购物车'})
-    del(@Body() body: goods_car_TDO.del) {
-        console.log(`111---body:`, body);
-        return {code: 200, count: 1, message: '成功:删除发片'};
+    async del(@Body() body: goods_car_TDO.del) {
+        console.log(`goods_car_del---body:`, body);
+        await this.db.tb_goods_car.delete({where: {id: body.id}})
+        return {code: 200, count: 1, msg: '成功:删除购物车'};
     }
 
     @Post('goods_car_update')
     @ApiOperation({summary: '更新购物车'})
-    update(@Body() body: goods_car_TDO.update) {
-        // create(@Body() body: any) {
-        console.log(`111---body:`, body);
-        return {code: 200, count: 1, message: '成功:更新发票'};
+    async update(@Body() body: goods_car_TDO.update, @Req() req) {
+        console.log(`goods_car_update---body:`, body);
+        body["user_id"] = req.user.id
+        body['price'] = this.tools.price_1_make({num: body.num, price_base: 100})
+        await this.db.tb_goods_car.update({where: {id: body.id}, data: body})
+        return {code: 200, count: 1, msg: '成功:更新购物车'};
     }
 
     @Post('goods_car_find_list')
     @ApiOperation({summary: '查询购物车-list'})
-    find_list(@Body() body: goods_car_TDO.find) {
+    async find_list(@Body() body: goods_car_TDO.find, @Req() req) {
         console.log(`111---body:`, body);
-        return {code: 200, count: 1, message: '成功:查询发票list'};
+        let list = await this.db.tb_goods_car.findMany({where: {user_id: req.user.id}})
+        return {code: 200, list, msg: '成功:查询购物车'};
     }
 
     @Get('goods_car_find_one')
     @ApiOperation({summary: '查询购物车-one'})
-    find_one(@Body() body: goods_car_TDO.find) {
+    async find_one(@Body() body: goods_car_TDO.find) {
         console.log(`111---body:`, body);
-        return {code: 200, count: 1, message: '成功:查询发票one'};
+        return {code: 200, count: 1, msg: '成功:查询购物车'};
     }
 
 }

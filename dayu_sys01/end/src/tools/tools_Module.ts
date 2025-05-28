@@ -9,6 +9,8 @@ import {crypt_encode_md5} from './crypt_encode_md5';
 import {Dec_public} from './Dec_public';
 import {Get_form} from './Get_form';
 import {R} from './R';
+import {price_1_make} from "./price_1_make";
+
 export const tools = {
     build_tree,
     build_tree_arr_flat,
@@ -18,10 +20,8 @@ export const tools = {
     Dec_public,
     Get_form,
     R,
+    price_1_make,
 }
-
-
-
 
 
 @Global()

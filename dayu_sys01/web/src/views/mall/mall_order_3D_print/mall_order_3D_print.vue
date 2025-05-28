@@ -3,22 +3,22 @@
     <el-card class="col" style="flex:1">
       <nav style="display: flex; flex-direction: column;position: relative">
         <span>上传3d文件</span>
-
-        <div class="file_area" @click="file_area_click()" style="position: absolute;bottom: 10px;left: 50%; transform: translateX(-50%);">
+        <div class="file_area" @click="file_area_click()"
+             style="position: absolute;bottom: 10px;left: 50%; transform: translateX(-50%);">
           <div>拖拽文件到这里上传</div>
           <input class="file_input" type="file" @change="on_change_file_111" accept=".stl,.png" style="display: none"/>
         </div>
-
-
-        <canvas class="canvasContainer" style="  width: 100%;  height: 300px;  border: 1px solid red;  box-sizing: border-box;"/>
+        <canvas class="canvasContainer"
+                style="  width: 100%;  height: 300px;  border: 1px solid red;  box-sizing: border-box;"/>
       </nav>
       <nav>
         <span @click="file_upload_find_list()">历史上传记录</span>
-        <el-table :data="file_upload_list" style="width: 100%" size="default" height="400" border highlight-current-row show-overflow-tooltip>
+        <el-table :data="file_upload_list" style="width: 100%" size="default" height="400" border highlight-current-row
+                  show-overflow-tooltip>
           <el-table-column label="序号" type="index" width="60px"/>
           <el-table-column label="文件名" prop="name"/>
           <el-table-column label="创建时间" prop="createdAt"/>
-          <el-table-column label="图片" prop="url">
+          <el-table-column label="图片" prop="url" width="70px">
             <template #default="scope">
               <img :src="scope.row.url" alt="" style="width:50px;height: 50px">
             </template>
@@ -37,12 +37,46 @@
 
 
     <el-card class="col" style="flex:1">
-      <nav>
-        <span>文件列表</span>
-        <ul>
-          <li>111</li>
-          <li>222</li>
-        </ul>
+      <nav class="aaa000">
+        <span @click="goods_car_find_list()">购物车</span>
+        <div class="aaa111" style="display: flex;flex-direction: column ;gap: 4px ;  width:100% ; font-size: 14px">
+          <div v-for="(item, i) in goods_car_list" style="">
+            <div style="display: flex;flex-direction: column ;gap: 4px ;">
+              <div style="display: flex;gap: 2px;">
+                <img :src="item.img_url" alt="" style="width:50px;height: 50px">
+                <div style="display: flex;gap: 2px; flex-direction: column;width:100%;">
+                  <div style=" display: flex;flex-direction: row; justify-content: space-between;">
+                    <span>
+                      <span style="font-weight: bolder"> 商品:</span>
+                      <span> {{ item.name }}</span>
+                    </span>
+                    <div>
+                      <el-button @click="" plain type="">修改规格</el-button>
+                      <el-button @click="goods_car_del(item.id)" plain type="">删除</el-button>
+                    </div>
+
+                  </div>
+                  <div style=" display: flex;flex-direction: row; justify-content: space-between">
+                    <span>
+                      <span style="font-weight: bolder">数量:</span>
+                      <!--                      <span>{{ item.num }}</span>-->
+                       <el-input-number v-model="item.num" :min="0" :max="99999" @change="num_change(item)"/>
+                    </span>
+                    <span>
+                      <span style="font-weight: bolder"> 价格:</span>
+                      <span> {{ item.price }}</span>
+                    </span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+
       </nav>
 
 
@@ -71,7 +105,8 @@ import three_parse_show from './three_parse_show';
 export default {
   data() {
     return {
-      file_upload_list: []
+      file_upload_list: [],
+      goods_car_list: [],
 
     };
   },
@@ -122,63 +157,93 @@ export default {
     },//
 
 
-    async goods_card_create(row){
-      console.log(`111---goods_card_create:`,     row        )
+    async goods_card_create(row) {
+      console.log(`111---goods_card_create:`, row)
+      await api.goods_car_create({name: row.name, img_url: row.url, num: 1,})
+
+    },//
+
+
+    async goods_car_find_list() {
+      api.goods_car_find_list((res) => this.goods_car_list = res.list)
+
+    },//
+
+
+    async goods_car_del(id) {
+      await api.goods_car_del({id})
+      await this.goods_car_find_list()
+    },//
+
+
+    async num_change(item) {
+      console.log(`111---num_change---item:`, item)
+      await this.api.goods_car_update(item)
+      await this.goods_car_find_list()
+    },//
+
+
+    async handle_file_drop() {
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+      const file_area = document.querySelector(".file_area")
+      // 拖拽进入区域时高亮
+      file_area.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        file_area.classList.add('hover');
+        console.log(`111---dragover---拖拽进入区域时高亮:`, 333)
+      })
+
+      // 拖拽离开区域
+      file_area.addEventListener('dragleave', () => {
+        file_area.classList.remove('hover');
+        console.log(`222---dragleave---拖拽离开区域:`, 333)
+      });
+
+
+      // 文件释放后处理
+      file_area.addEventListener('drop', async (e) => {
+        e.preventDefault();
+        file_area.classList.remove('hover');
+        console.log(`333---drop---文件释放后处理:`, 333)
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+          console.log(`444---drop---files:`, files)
+          await this.make_file_one({files})
+        }
+      })
+
+
+      //画布
+      let canvasContainer = document.querySelector(".canvasContainer")
+      canvasContainer.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        file_area.classList.add('hover');
+        console.log(`canvasContainer---dragover---拖拽进入区域时高亮:`, 333)
+      })
+
+      //画布
+      canvasContainer.addEventListener('drop', async (e) => {
+        e.preventDefault();
+        file_area.classList.remove('hover');
+        console.log(`333---drop---文件释放后处理:`, 333)
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+          console.log(`444---drop---files:`, files)
+          await this.make_file_one({files})
+        }
+      })
 
     },//
 
 
   },
   async mounted() {
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    const file_area = document.querySelector(".file_area")
-    // 拖拽进入区域时高亮
-    file_area.addEventListener("dragover", (e) => {
-      e.preventDefault();
-      file_area.classList.add('hover');
-      console.log(`111---dragover---拖拽进入区域时高亮:`, 333)
-    })
-
-    // 拖拽离开区域
-    file_area.addEventListener('dragleave', () => {
-      file_area.classList.remove('hover');
-      console.log(`222---dragleave---拖拽离开区域:`, 333)
-    });
 
 
-    // 文件释放后处理
-    file_area.addEventListener('drop', async (e) => {
-      e.preventDefault();
-      file_area.classList.remove('hover');
-      console.log(`333---drop---文件释放后处理:`, 333)
-      const files = e.dataTransfer.files;
-      if (files.length > 0) {
-        console.log(`444---drop---files:`, files)
-        await this.make_file_one({files})
-      }
-    })
-
-
-    //画布
-    let canvasContainer = document.querySelector(".canvasContainer")
-    canvasContainer.addEventListener('dragover', (e) => {
-      e.preventDefault();
-      file_area.classList.add('hover');
-      console.log(`canvasContainer---dragover---拖拽进入区域时高亮:`, 333)
-    })
-
-    //画布
-    canvasContainer.addEventListener('drop', async (e) => {
-      e.preventDefault();
-      file_area.classList.remove('hover');
-      console.log(`333---drop---文件释放后处理:`, 333)
-      const files = e.dataTransfer.files;
-      if (files.length > 0) {
-        console.log(`444---drop---files:`, files)
-        await this.make_file_one({files})
-      }
-    })
-
+    this.api = api
+    this.file_upload_find_list()
+    this.handle_file_drop()
+    this.goods_car_find_list()
 
   }
 };

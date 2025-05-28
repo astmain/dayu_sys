@@ -35,20 +35,23 @@ export class AuthGuard implements CanActivate {
         const request = context.switchToHttp().getRequest();
         const token = request.headers?.token?.replace(/\s/g, '')
         // console.log(`AuthGuard---request:`, request)
-        console.log(`AuthGuard---token:`, token)
+        console.log(`AuthGuard---111---token:`, token)
         // 判断token是否存在
         if (!token) {
-            // console.log(`AuthGuard---token---空:`, token)
+            // console.log(`AuthGuard---222---token---空:`, token)
             throw new UnauthorizedException()
+        }else{
+            // console.log(`AuthGuard---333---token---存在:`, token)
         }
 
         // 解析token得到user信息
         try {
             let payload = await this.jwt_service.verifyAsync(token, {secret: const_jwt.secret,})
-            // console.log(`AuthGuard---payload:`, payload)
+            // console.log(`AuthGuard---444---payload:`,     payload        )
             // 请求全局参数   @Req() request   调用   request["user"]
             request["user"] = payload
         } catch (error) {
+            // console.log(`AuthGuard---555---error:`, error)
             throw new UnauthorizedException()
         }
 
