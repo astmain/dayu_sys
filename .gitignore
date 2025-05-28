@@ -24,8 +24,16 @@ dist-ssr
 *.sw?
 
 
+
 #忽略文件====================================================
 *package-lock.json*
 **.db
 **db_dev_sqlited.db**
+
+
+#虑忽略以下Python相关文件
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
 		

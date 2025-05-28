@@ -19,9 +19,9 @@ async function 菜单数据菜单() {
         {id: 8801, menu: "商城订单3D打印", path: "/mall_order_3D_print",},
         {id: 8802, menu: "商城订单管理", path: "/mall_order_manage",},
         {id: 8803, menu: "商城材料管理", path: "/mall_materials_manage",},
-
-
     ]
+
+
     await prisma.tb_menu.deleteMany()
     await prisma.tb_menu.createMany({data: tb_menu})
 
