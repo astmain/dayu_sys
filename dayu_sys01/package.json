@@ -13,7 +13,6 @@
     "安装1": "pnpm -F     api_admin         add          md5   -S     ",
     "安装2": "pnpm -F     vue_admin         add                    @element-plus/icons-vue   -S     ",
     "卸载包": "pnpm -F     electron_desktop_00    remove         electron-win-state@8.0.0             ",
-
     "操作数据库": "==========================================================",
     "db_push": "pnpm    --filter api_admin     db_push ",
     "db_generate": "pnpm    --filter api_admin     db_generate ",
