@@ -53,6 +53,7 @@
                     </span>
                     <div>
                       <el-button @click="()=>(goods_car_curr.show=true,goods_car_curr.data=item)" plain type="">修改规格</el-button>
+                      <el-button @click="open_edit_3d_img()" plain type="">添加打孔位置</el-button>
                       <el-button @click="goods_car_del(item.id)" plain type="">删除</el-button>
                     </div>
 
@@ -113,6 +114,15 @@
       </el-form>
     </el-dialog>
 
+
+    <el-dialog v-model="edit_3d_img.show" title="添加打孔位置" width="800px" draggable>
+      <div style="display: flex ;flex-direction: column">
+
+        <com_edit_3d_img ref="com_edit_3d_img" :show="edit_3d_img.show"></com_edit_3d_img>
+      </div>
+
+    </el-dialog>
+
   </div>
 
 
@@ -121,8 +131,12 @@
 <script>
 // 自定义
 import three_parse_show from './three_parse_show';
+import com_edit_3d_img from './com_edit_3d_img.vue';
 
 export default {
+  components: {
+    com_edit_3d_img,
+  },
   data() {
     return {
       file_upload_list: [],
@@ -130,7 +144,7 @@ export default {
       goods_car_list: [],
       goods_car_price_list: [],
       goods_car_total: 0,
-      goods_car_price_curr:{
+      goods_car_price_curr: {
         highlight: null,
       },
       // 222
@@ -138,13 +152,30 @@ export default {
         show: false,
         highlight: null,
         data: {},
+      },
 
-      }
+      edit_3d_img: {
+        show: false,
+      },
+
 
     };
   },
 
   methods: {
+
+    async open_edit_3d_img() {
+      this.edit_3d_img.show = true
+      // console.log(`111---$refs:`, this.$parent.$parent.$refs)
+      console.log(`111---this:`, this)
+      console.log(`111---$refs:`, this.$refs)
+      window.that=this
+      console.log(`111---$refs:`, this.$refs.com_edit_3d_img)
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+      await this.$refs.com_edit_3d_img.show222({blobURL: 'blob:http://localhost:10002/8513c09a-7488-4367-a3d7-64efb244631e'})
+    },//
+
+
     async on_change_file_111(event) {
       // 上传文件
       // let file = event.target.files[0]
@@ -153,6 +184,7 @@ export default {
       // // 本地文件blobURL
       // let blobURL = URL.createObjectURL(event.target.files[0])//得到blobURL
       let blobURL = await this.make_file_one({files: event.target.files})
+      window.blobURL=blobURL
       event.target.value = ''; // 清空input的值
     },
 
