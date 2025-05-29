@@ -106,13 +106,12 @@ model tb_goods_car {
 }
 
 model tb_goods_order {
-  id        Int       @id @default(autoincrement())
-  name      String    @default("")
-  img_url   String    @default("")
-  price     Float     @default(0.0)
-  num       Int       @default(0)
-  status    Int       @default(0)
-  createdAt DateTime  @default(now())
-  user_id   Int       @default(0) // 外键
-  tb_user   tb_user[]
+  id         Int       @id @default(autoincrement())
+  price      Float     @default(0.0) // 111111
+  status     Int       @default(0) /// 0待支付,1取消订单,3支付完成,4待发货,5待收货,6完成
+  order_code String    @default(uuid())
+  details    Json      @default("[]") //  订单信息111111
+  user_id    Int       @default(0) // 外键
+  createdAt  DateTime  @default(now())
+  tb_user    tb_user[]
 }

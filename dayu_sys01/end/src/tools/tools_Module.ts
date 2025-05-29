@@ -8,8 +8,9 @@ import {build_tree_ids} from './build_tree_ids';
 import {crypt_encode_md5} from './crypt_encode_md5';
 import {Dec_public} from './Dec_public';
 import {Get_form} from './Get_form';
-import {R} from './R';
 import {price_1_make} from "./price_1_make";
+import {R} from './R';
+import {AjaxResult} from "./AjaxResult";
 
 export const tools = {
     build_tree,
@@ -19,8 +20,9 @@ export const tools = {
     crypt_encode_md5,
     Dec_public,
     Get_form,
-    R,
     price_1_make,
+    R,
+    AjaxResult,
 }
 
 

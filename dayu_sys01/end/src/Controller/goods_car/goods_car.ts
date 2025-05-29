@@ -51,22 +51,12 @@ export class goods_car {
     async find_list(@Body() body: goods_car_TDO.find, @Req() req) {
         console.log(`111---body:`, body);
         let goods_car_list = await this.db.tb_goods_car.findMany({where: {user_id: req.user.id}})
-
-
-        let goods_car_price_list = [
-            {name: "经济:12个工作日", price: "￥" + (_.sumBy(goods_car_list, (o: any) => o.price * o.num) * 1.0)},
-            {name: "标准:7个工作日", price: "￥" + (_.sumBy(goods_car_list, (o: any) => o.price * o.num) * 1.5)},
-            {name: "加急:3个工作日", price: "￥" + (_.sumBy(goods_car_list, (o: any) => o.price * o.num) * 5)},
-            {name: "专机加急:2个工作日", price: "￥" + (_.sumBy(goods_car_list, (o: any) => o.price * o.num) * 10)}
-        ]
         let goods_car_total = _.sumBy(goods_car_list, (o: any) => o.num)
-
-
-        // this.goods_car_list = res.goods_car_list
-        // this.goods_car_price_list = res.goods_car_price_list
-        // this.goods_car_total = res.goods_car_total
-
-
+        let one1 = {name: "经济:12个工作日", price: _.sumBy(goods_car_list, (o: any) => o.price * o.num) * 1.0}
+        let one2 = {name: "经济:7个工作日", price: _.sumBy(goods_car_list, (o: any) => o.price * o.num) * 1.5}
+        let one3 = {name: "经济:3个工作日", price: _.sumBy(goods_car_list, (o: any) => o.price * o.num) * 3}
+        let one4 = {name: "经济:2个工作日", price: _.sumBy(goods_car_list, (o: any) => o.price * o.num) * 6}
+        let goods_car_price_list = [one1, one2, one3, one4]
         return {code: 200, msg: '成功:查询-购物车-list', goods_car_list, goods_car_price_list, goods_car_total};
     }
 
