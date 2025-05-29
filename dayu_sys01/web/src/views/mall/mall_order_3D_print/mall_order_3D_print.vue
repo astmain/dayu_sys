@@ -88,7 +88,6 @@
             <span> {{ item.name }}</span>
             <span> {{ item.price }}</span>
           </div>
-
         </div>
 
         <div>
@@ -96,13 +95,10 @@
           <span>{{ goods_car_total }}</span>
         </div>
 
-
         <div>
           <span>总计(含税)</span>
           <span>{{ goods_car_price_curr.price }}</span>
         </div>
-
-
         <el-button type="primary" @click="">提交订单</el-button>
       </nav>
     </el-card>
