@@ -83,10 +83,8 @@
 
       <nav>
         <span>交货日期</span>
-        <ul>
-          <li>111</li>
-          <li>222</li>
-        </ul>
+        <div> 零件数量 0件</div>
+        <div> 总计(含税) ￥Na</div>
         <el-button type="primary" @click="">提交订单</el-button>
       </nav>
     </el-card>
@@ -188,6 +186,7 @@ export default {
     async goods_card_create(row) {
       console.log(`111---goods_card_create:`, row)
       await api.goods_car_create({name: row.name, img_url: row.url, num: 1,})
+      await this.goods_car_find_list()
 
     },//
 
@@ -199,6 +198,7 @@ export default {
 
 
     async goods_car_del(id) {
+      if (await isok_delete_confirm() === false) return
       await api.goods_car_del({id})
       await this.goods_car_find_list()
     },//

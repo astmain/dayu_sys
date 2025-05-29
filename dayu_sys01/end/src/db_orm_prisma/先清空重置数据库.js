@@ -19,7 +19,7 @@ async function 先清空重置数据库() {
 
     // 2生产数据库==============================================
     // execSync('npx prisma db push    ', {stdio: 'inherit'})
-    execSync('npx prisma db push    --schema=./table.prisma ', {stdio: 'inherit'})
+    execSync('     npx prisma db push    --schema=./table.prisma         ', {stdio: 'inherit'})
     console.error('成功:2生产数据库')
 
     await new Promise((resolve) => setTimeout(resolve, 5000))

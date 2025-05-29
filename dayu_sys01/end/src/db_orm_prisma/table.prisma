@@ -69,7 +69,6 @@ model tb_user {
   tb_goods_car     tb_goods_car[]  @relation("ref_tb_user_tb_goods_car") // 正向关联字段名
   tb_goods_order   tb_goods_order? @relation(fields: [tb_goods_orderId], references: [id])
   tb_goods_orderId Int?
-  tb_goods_order   tb_goods_order? @relation(fields: [tb_goods_orderId], references: [id])
 }
 
 model tb_menu {
@@ -115,6 +114,5 @@ model tb_goods_order {
   status    Int       @default(0)
   createdAt DateTime  @default(now())
   user_id   Int       @default(0) // 外键
-  tb_user   tb_user[] @relation("ref_tb_user_tb_goods_car") // 反向关联字段名
   tb_user   tb_user[]
 }
