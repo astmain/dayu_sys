@@ -1,4 +1,4 @@
-import {IsArray, IsNotEmpty, IsNumber, IsOptional, IsString, Length, Min} from "class-validator";
+import {IsArray, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString, Length, Min} from "class-validator";
 import {ApiProperty} from "@nestjs/swagger";
 
 // 新增
@@ -22,6 +22,7 @@ class create {
     @IsNumber()
     num: number = 0;
 }
+
 // 更新
 class update extends create {
     @ApiProperty({description: '购物车商品id', default: 0, type: Number})
@@ -42,14 +43,25 @@ class find {
     // @IsOptional()
     // @IsNumber()
     // id: number = 0;
-
 }
+
+//购物车计算
+class goods_car_compute {
+    @IsArray({message: '商品ids-必须是数组',})
+    @IsNumber({}, {each: true, message: '商品ids-的每一项必须是数字类型',})
+    @Min(1, {each: true, message: '商品ids-的每一项必须大于等于 1',}) // 每个数字 >= 0
+    @IsInt({message: '数量必须是整数'})
+    ids: number[];
+}
+
 
 export {
     create,
     del,
     update,
-    find
+    find,
+    // 其他
+    goods_car_compute,
 }
 
 

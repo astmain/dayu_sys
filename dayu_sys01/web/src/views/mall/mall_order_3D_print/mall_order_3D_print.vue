@@ -81,10 +81,28 @@
       </nav>
 
 
-      <nav>
+      <nav style="display: flex; flex-direction: column;gap: 8px;">
         <span>交货日期</span>
-        <div> 零件数量 0件</div>
-        <div> 总计(含税) ￥Na</div>
+        <div v-for="(item ,i) in goods_car_price_list">
+          <div style="display: flex; justify-content: space-between" @click="goods_car_price_curr={highlight:i,...item}  " :class="{'highlight':goods_car_price_curr.highlight===i}">
+            <span> {{ item.name }}</span>
+            <span> {{ item.price_extra }}</span>
+          </div>
+
+        </div>
+
+        <div>
+          <span>零件数量</span>
+          <span>{{ goods_car_total }}</span>
+        </div>
+
+
+        <div>
+          <span>总计(含税)</span>
+          <span>{{ goods_car_price_curr.price }}</span>
+        </div>
+
+
         <el-button type="primary" @click="">提交订单</el-button>
       </nav>
     </el-card>
@@ -97,21 +115,6 @@
         </el-form-item>
       </el-form>
     </el-dialog>
-
-
-    <!--
-
-          <ElDialog v-model={show} title={props.title} width="500px" draggable>
-            <ElForm model={form} >
-              <ElFormItem label="新增-组织" prop='position'>
-                <ElInput v-model={form.depart} />
-              </ElFormItem>
-            </ElForm>
-            <ElButton type="primary" onclick={async () => { submit() }}  >确定</ElButton>
-          </ElDialog>
-
-    -->
-
 
   </div>
 
@@ -126,7 +129,14 @@ export default {
   data() {
     return {
       file_upload_list: [],
+      // 111
       goods_car_list: [],
+      goods_car_price_list: [],
+      goods_car_total: 0,
+      goods_car_price_curr:{
+        highlight: null,
+      },
+      // 222
       goods_car_curr: {
         show: false,
         highlight: null,
@@ -192,8 +202,10 @@ export default {
 
 
     async goods_car_find_list() {
-      api.goods_car_find_list((res) => this.goods_car_list = res.list)
-
+      let res = await api.goods_car_find_list()
+      this.goods_car_list = res.goods_car_list
+      this.goods_car_price_list = res.goods_car_price_list
+      this.goods_car_total = res.goods_car_total
     },//
 
 

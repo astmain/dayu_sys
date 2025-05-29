@@ -223,8 +223,8 @@ async function goods_car_find_list(callback) {
     const res = await axios_api(config)
     console.log(tag, 'res:', res)
     res.code === 200 ? ElMessage.success({message: res.msg, duration: 1000, showClose: true}) : 0
-    if (callback)     callback(res)
-    return
+    // if (callback)     callback(res)
+    return res
 }
 
 

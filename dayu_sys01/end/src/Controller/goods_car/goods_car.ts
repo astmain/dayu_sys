@@ -3,6 +3,7 @@ import {Put, Param, Delete, HttpCode} from '@nestjs/common';
 import {ParseArrayPipe} from '@nestjs/common/pipes/parse-array.pipe';
 import {ApiTags, ApiOperation, ApiResponse, ApiQuery} from '@nestjs/swagger';
 import {ApiBearerAuth, ApiBody, ApiParam} from '@nestjs/swagger';
+import * as _ from 'lodash';
 // 自定义
 import tool from "../../tool"
 import * as goods_car_TDO from './goods_car_TDO';
@@ -49,8 +50,24 @@ export class goods_car {
     @ApiOperation({summary: '查询购物车-list'})
     async find_list(@Body() body: goods_car_TDO.find, @Req() req) {
         console.log(`111---body:`, body);
-        let list = await this.db.tb_goods_car.findMany({where: {user_id: req.user.id}})
-        return {code: 200, list, msg: '成功:查询-购物车-list'};
+        let goods_car_list = await this.db.tb_goods_car.findMany({where: {user_id: req.user.id}})
+
+
+        let goods_car_price_list = [
+            {name: "标准:7个工作日", price_extra:`￥88`, price: "￥" + (_.sumBy(goods_car_list, (o: any) => o.price * o.num) * 1.5)},
+            {name: "经济:12个工作日",  price_extra:`￥50`,price: "￥" + (_.sumBy(goods_car_list, (o: any) => o.price * o.num) * 2)},
+            {name: "加急:3个工作日", price_extra:`￥200`, price: "￥" + (_.sumBy(goods_car_list, (o: any) => o.price * o.num) * 5)},
+            {name: "专机加急:2个工作日", price_extra:`￥300`, price: "￥" + (_.sumBy(goods_car_list, (o: any) => o.price * o.num) * 10)}
+        ]
+        let goods_car_total = _.sumBy(goods_car_list, (o: any) => o.num)
+
+
+        // this.goods_car_list = res.goods_car_list
+        // this.goods_car_price_list = res.goods_car_price_list
+        // this.goods_car_total = res.goods_car_total
+
+
+        return {code: 200,   msg: '成功:查询-购物车-list',goods_car_list,goods_car_price_list,  goods_car_total};
     }
 
     @Get('goods_car_find_one')
@@ -59,6 +76,22 @@ export class goods_car {
         console.log(`111---body:`, body);
         return {code: 200, count: 1, msg: '成功:查询-购物车-list'};
     }
+
+
+    // @Get('goods_car_compute')
+    // @ApiOperation({summary: '计算-购物车'})
+    // async goods_car_compute(@Body() body: goods_car_TDO.goods_car_compute) {
+    //     console.log(`111---body:`, body);
+    //     let list = await this.db.tb_goods_car.findMany({where: {ind: {in: {id: body.ids}}}})
+    //     let price_total = [
+    //         {name: "标准:7个工作日", price: "￥" + (_.sumBy(list, (o: any) => o.price * o.num) * 1.5)},
+    //         {name: "经济:12个工作日", price: "￥" + (_.sumBy(list, (o: any) => o.price * o.num) * 2)},
+    //         {name: "加急:3个工作日", price: "￥" + (_.sumBy(list, (o: any) => o.price * o.num) * 5)},
+    //         {name: "专机加急:2个工作日", price: "￥" + (_.sumBy(list, (o: any) => o.price * o.num) * 10)}
+    //     ]
+    //     let goods_total = _.sumBy(list, (o: any) => o.num)
+    //     return {code: 200, msg: '成功:查询-购物车-list', goods_total, price_total,};
+    // }
 
 }
 
