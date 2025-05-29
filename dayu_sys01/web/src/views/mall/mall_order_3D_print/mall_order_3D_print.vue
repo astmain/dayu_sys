@@ -86,7 +86,7 @@
         <div v-for="(item ,i) in goods_car_price_list">
           <div style="display: flex; justify-content: space-between" @click="goods_car_price_curr={highlight:i,...item}  " :class="{'highlight':goods_car_price_curr.highlight===i}">
             <span> {{ item.name }}</span>
-            <span> {{ item.price_extra }}</span>
+            <span> {{ item.price }}</span>
           </div>
 
         </div>

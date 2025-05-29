@@ -54,10 +54,10 @@ export class goods_car {
 
 
         let goods_car_price_list = [
-            {name: "标准:7个工作日", price_extra:`￥88`, price: "￥" + (_.sumBy(goods_car_list, (o: any) => o.price * o.num) * 1.5)},
-            {name: "经济:12个工作日",  price_extra:`￥50`,price: "￥" + (_.sumBy(goods_car_list, (o: any) => o.price * o.num) * 2)},
-            {name: "加急:3个工作日", price_extra:`￥200`, price: "￥" + (_.sumBy(goods_car_list, (o: any) => o.price * o.num) * 5)},
-            {name: "专机加急:2个工作日", price_extra:`￥300`, price: "￥" + (_.sumBy(goods_car_list, (o: any) => o.price * o.num) * 10)}
+            {name: "经济:12个工作日", price: "￥" + (_.sumBy(goods_car_list, (o: any) => o.price * o.num) * 1.0)},
+            {name: "标准:7个工作日", price: "￥" + (_.sumBy(goods_car_list, (o: any) => o.price * o.num) * 1.5)},
+            {name: "加急:3个工作日", price: "￥" + (_.sumBy(goods_car_list, (o: any) => o.price * o.num) * 5)},
+            {name: "专机加急:2个工作日", price: "￥" + (_.sumBy(goods_car_list, (o: any) => o.price * o.num) * 10)}
         ]
         let goods_car_total = _.sumBy(goods_car_list, (o: any) => o.num)
 
@@ -67,7 +67,7 @@ export class goods_car {
         // this.goods_car_total = res.goods_car_total
 
 
-        return {code: 200,   msg: '成功:查询-购物车-list',goods_car_list,goods_car_price_list,  goods_car_total};
+        return {code: 200, msg: '成功:查询-购物车-list', goods_car_list, goods_car_price_list, goods_car_total};
     }
 
     @Get('goods_car_find_one')
