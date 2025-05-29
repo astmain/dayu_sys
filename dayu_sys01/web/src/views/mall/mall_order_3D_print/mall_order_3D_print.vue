@@ -99,6 +99,7 @@
           <span>总计(含税)</span>
           <span>{{ goods_car_price_curr.price }}</span>
         </div>
+        交货日期-缺少默认选中数据-和整合obj对象数据
         <el-button type="primary" @click="">提交订单</el-button>
       </nav>
     </el-card>
