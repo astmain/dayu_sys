@@ -32,7 +32,7 @@
       <el-dialog v-model="BUS.bus_unpaid_pay.show" title="待支付" width="800px" draggable>
         <el-button @click="met1()">met1</el-button>
 
-        <img v-img="{src:'https://gitee.com/astmain/static/raw/master/pay/unpaid_qr_code.jpg'}"/>
+        <img v-img="{ width:'200px', src:'https://gitee.com/astmain/static/raw/master/pay/unpaid_qr_code.jpg'}"/>
 
 
         <div>https://img2.baidu.com/it/u=1067594889,3904550527&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500</div>
