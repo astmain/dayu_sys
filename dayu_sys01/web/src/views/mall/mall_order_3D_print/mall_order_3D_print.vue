@@ -41,7 +41,6 @@
         <div class="aaa111" style="display: flex;flex-direction: column ;gap: 4px ;  width:100% ; font-size: 14px">
           <div v-for="(item, i) in goods_car_list" style="">
             <div style="display: flex;flex-direction: column ;gap: 4px ;padding: 4px"
-
                  @click="goods_car_curr.highlight=item.id" :class="{'highlight':goods_car_curr.highlight===item.id}">
               <div style="display: flex;gap: 2px;">
                 <img :src="item.img_url" alt="" style="width:50px;height: 50px">
@@ -85,9 +84,9 @@
       <nav style="display: flex; flex-direction: column;gap: 8px;">
         <span>交货日期</span>
         <div v-for="(item ,i) in goods_car_price_list">
-          <div style="display: flex; justify-content: space-between" @click="goods_car_price_curr={highlight:i,...item}  " :class="{'highlight':goods_car_price_curr.highlight===i}">
+          <div style="display: flex; justify-content: space-between" @click="click_highlight_1111(item ,i)" :class="{'highlight':goods_car_price_curr.highlight===i}">
             <span> {{ item.name }}</span>
-            <span> {{ item.price }}</span>
+            <span> ￥{{ item.price }}</span>
           </div>
         </div>
 
@@ -100,8 +99,7 @@
           <span>总计(含税)</span>
           <span>{{ goods_car_price_curr.price }}</span>
         </div>
-        交货日期-缺少默认选中数据-和整合obj对象数据
-        <el-button type="primary" @click="">提交订单</el-button>
+        <el-button type="primary" @click="goods_order_create(item)">提交订单</el-button>
       </nav>
     </el-card>
 
@@ -117,10 +115,8 @@
 
     <el-dialog v-model="edit_3d_img.show" title="添加打孔位置" width="800px" draggable>
       <div style="display: flex ;flex-direction: column">
-
         <com_edit_3d_img ref="com_edit_3d_img" :show="edit_3d_img.show"></com_edit_3d_img>
       </div>
-
     </el-dialog>
 
   </div>
@@ -146,6 +142,8 @@ export default {
       goods_car_total: 0,
       goods_car_price_curr: {
         highlight: null,
+        info: {},
+        price: 0,
       },
       // 222
       goods_car_curr: {
@@ -169,7 +167,7 @@ export default {
       // console.log(`111---$refs:`, this.$parent.$parent.$refs)
       console.log(`111---this:`, this)
       console.log(`111---$refs:`, this.$refs)
-      window.that=this
+      window.that = this
       console.log(`111---$refs:`, this.$refs.com_edit_3d_img)
       await new Promise((resolve) => setTimeout(resolve, 1000))
       await this.$refs.com_edit_3d_img.show222({blobURL: 'blob:http://localhost:10002/8513c09a-7488-4367-a3d7-64efb244631e'})
@@ -184,7 +182,7 @@ export default {
       // // 本地文件blobURL
       // let blobURL = URL.createObjectURL(event.target.files[0])//得到blobURL
       let blobURL = await this.make_file_one({files: event.target.files})
-      window.blobURL=blobURL
+      window.blobURL = blobURL
       event.target.value = ''; // 清空input的值
     },
 
@@ -198,7 +196,6 @@ export default {
       if (await isok_delete_confirm() === false) return
       await api.file_delete({id})
       await this.file_upload_find_list()
-
     },//
 
 
@@ -235,6 +232,13 @@ export default {
       this.goods_car_list = res.goods_car_list
       this.goods_car_price_list = res.goods_car_price_list
       this.goods_car_total = res.goods_car_total
+      await this.click_highlight_1111(this.goods_car_list[0], 0)
+    },//
+
+
+    async click_highlight_1111(item, i) {
+      console.log(`111---item:`, item)
+      this.goods_car_price_curr = {highlight: i, ...item}
     },//
 
 
@@ -242,6 +246,23 @@ export default {
       if (await isok_delete_confirm() === false) return
       await api.goods_car_del({id})
       await this.goods_car_find_list()
+    },//
+
+
+    async goods_order_create() {
+      console.log(`111---222:`, this.goods_car_list)
+      console.log(`111---222:`, this.goods_car_total)
+      console.log(`111---222:`, this.goods_car_price_curr)
+      let data = {
+        details: this.goods_car_list,
+        price: this.goods_car_price_curr.price,
+      }
+      let res = await this.api.goods_order_create(data)
+      if (res.code === 200) {
+        console.log(`请支付--- res.one :`, res.one)
+        // alert("请支付")
+        this.$router.push("/mall_order_my")
+      }
     },//
 
 

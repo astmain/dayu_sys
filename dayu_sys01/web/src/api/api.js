@@ -4,7 +4,7 @@ async function file_upload_one({file}) {
     let tag = "file_upload_one"
     const data = new FormData();
     data.append('file', file); // 'file' 是后端接收字段名，根据实际情况修改
-    let config = {method: "post", url: "/file_upload/file_upload_one",data, headers: {'Content-Type': 'multipart/form-data',    }}
+    let config = {method: "post", url: "/file_upload/file_upload_one", data, headers: {'Content-Type': 'multipart/form-data',}}
     console.log(tag, 'config:', config)
     const res = await axios_api(config)
     console.log(tag, 'res:', res)
@@ -14,30 +14,26 @@ async function file_upload_one({file}) {
 
 async function file_delete({id}) {
     let tag = "file_delete"
-    let config = {method: "post", url: "/file_upload/file_delete",data:{id}}
+    let config = {method: "post", url: "/file_upload/file_delete", data: {id}}
     console.log(tag, 'config:', config)
     const res = await axios_api(config)
     console.log(tag, 'res:', res)
     res.code === 200 ? ElMessage.success({message: res.msg, duration: 1000, showClose: true}) : 0
     return res.result
 }
-
-
-
 
 
 async function file_upload_one_3d({file}) {
     let tag = "file_upload_one_3d"
     const data = new FormData();
     data.append('file', file); // 'file' 是后端接收字段名，根据实际情况修改
-    let config = {method: "post", url: "/file_upload/file_upload_one_3d",data, headers: {'Content-Type': 'multipart/form-data',    }}
+    let config = {method: "post", url: "/file_upload/file_upload_one_3d", data, headers: {'Content-Type': 'multipart/form-data',}}
     console.log(tag, 'config:', config)
     const res = await axios_api(config)
     console.log(tag, 'res:', res)
     res.code === 200 ? ElMessage.success({message: res.msg, duration: 1000, showClose: true}) : 0
     return res.result
 }
-
 
 
 async function file_upload_find_list() {
@@ -206,9 +202,9 @@ async function delete_user({user_id}) {
 }
 
 // 购物车=================================================
-export async function goods_car_create({name ,img_url,num}) {
+export async function goods_car_create({name, img_url, num}) {
     let tag = "goods_car_create"
-    let config = {method: "post", url: "/goods_car/goods_car_create", data: {name ,img_url,num}}
+    let config = {method: "post", url: "/goods_car/goods_car_create", data: {name, img_url, num}}
     console.log(tag, 'config:', config)
     const res = await axios_api(config)
     console.log(tag, 'res:', res)
@@ -227,8 +223,7 @@ async function goods_car_find_list(callback) {
     return res
 }
 
-
-
+// 删除-购物车
 async function goods_car_del({id}) {
     let tag = "goods_car_del"
     let config = {method: "post", url: "/goods_car/goods_car_del", data: {id}}
@@ -238,11 +233,7 @@ async function goods_car_del({id}) {
     res.code === 200 ? ElMessage.success({message: res.msg, duration: 1000, showClose: true}) : 0
     return
 }
-
-
-
-
-
+// 更新-购物车
 async function goods_car_update({name, img_url, num, id}) {
     let tag = "goods_car_update"
     let config = {method: "post", url: "/goods_car/goods_car_update", data: {name, img_url, num, id}}
@@ -253,50 +244,62 @@ async function goods_car_update({name, img_url, num, id}) {
     return
 }
 
+async function goods_order_create({price, details}) {
+    let tag = "goods_car_del"
+    let config = {method: "post", url: "/goods_order/goods_order_create", data: {price, details}}
+    console.log(tag, 'config:', config)
+    const res = await axios_api(config)
+    console.log(tag, 'res:', res)
+    res.code === 200 ? ElMessage.success({message: res.msg, duration: 1000, showClose: true}) : 0
+    return res
+}
+async function goods_order_find_list() {
+    let tag = "goods_order_find_list"
+    let config = {method: "post", url: "/goods_order/goods_order_find_list", data: {}}
+    console.log(tag, 'config:', config)
+    const res = await axios_api(config)
+    console.log(tag, 'res:', res)
+    res.code === 200 ? ElMessage.success({message: res.msg, duration: 1000, showClose: true}) : 0
+    return res
+}
+
+async function goods_order_del(id) {
+    let tag = "goods_order_del"
+    let config = {method: "post", url: "/goods_order/goods_order_del", data: {id}}
+    console.log(tag, 'config:', config)
+    const res = await axios_api(config)
+    console.log(tag, 'res:', res)
+    res.code === 200 ? ElMessage.success({message: res.msg, duration: 1000, showClose: true}) : 0
+    return res
+}
+
+
+
+
+
 let api = {
     // tb_depart: require("./tb_depart"),
     // tb_user: require("./tb_user"),
     // tb_menu: require("./tb_menu"),
     // tb_role: require("./tb_role"),
     // 上传文件=====================================
-    file_upload_one ,
-    file_delete ,
-    file_upload_one_3d ,
-    file_upload_find_list ,
-
-
-
+    file_upload_one, file_delete, file_upload_one_3d, file_upload_find_list,
     // 扁平化api=====================================
-    find_depart_role_tree,
-    find_permiss_menu_tree,
-
-
+    find_depart_role_tree, find_permiss_menu_tree,
     //角色
-    role_create,
-    role_delete,
-    role_save,
-
-
+    role_create, role_delete, role_save,
     //组织
-    depart_create,
-    depart_delete,
-    depart_update,
-
-
+    depart_create, depart_delete, depart_update,
     //组织
     find_departs_tree,
-
     // 用户
-    create_user,
-    update_user,
-    find_user_by_depart_id,
-    delete_user,
-
+    create_user, update_user, find_user_by_depart_id, delete_user,
     //购物车
-    goods_car_create,
-    goods_car_find_list,
-    goods_car_update,
-    goods_car_del,
+    goods_car_create, goods_car_find_list, goods_car_update, goods_car_del,
+    //订单
+    goods_order_create,
+    goods_order_find_list,
+    goods_order_del,
 
 
 }
