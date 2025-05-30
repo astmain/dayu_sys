@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vueCms.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <title><% title %></title>
+    <meta name="description" content="使用vue3+nestjs搭建的后台管理系统-沉默小管">
+    <meta name="author" content="沉默小管-VueCms">
+    <meta name="keywords" content="vueCms,vueAdmin,vue,cms,admin,vueCms_xg,沉默小管">
+    <% for (var i in cssCdn) { %>
+    <link href="<%= cssCdn[i] %>" type="text/css" rel="stylesheet" />
+    <% } %>
+    <script type="text/javascript"
+            src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js"
+            data-appid="102071824"
+            data-redirecturi="http://api2.vuecms.cn/auth/qq"
+            charset="utf-8"
+    ></script>
+
+</head>
+<body>
+<div id="app"></div>
+<% for (let i in jsCdn) { %>
+<script src="<%= jsCdn[i] %>"></script>
+<% } %>
+<script type="module" src="/src/main.ts"></script>
+<script type="module" src="./config/resizeRem.js"></script>
+<script type="module" src="./config/webCdn.js"></script>
+
+</body>
+</html>

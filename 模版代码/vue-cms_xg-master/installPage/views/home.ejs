@@ -1,0 +1,262 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>首页</title>
+    <link rel="stylesheet" href="/css/home.css">
+  </head>
+  <body>
+  <div class="loading-style u-f u-f-ac u-f-ajc">
+      <div class="loading-icon">
+          <span style="background:blue"></span>
+          <span style="background:blue"></span>
+          <span style="background:blue"></span>
+          <span style="background:blue"></span>
+          <span style="background:blue"></span>
+      </div>
+  </div>
+
+  <div class="container">
+    <%if(isConfigItem == true){%>
+      <input type="text" value="1" style="display: none" id="isConfigItem">
+    <%}else{%>
+        <input type="text" value="2" style="display: none" id="isConfigItem">
+    <%}%>
+    <%if(isConfigItem == true){%>
+      <div class="u-f u-f-ac u-f-ajc" style="margin-top:20px;">
+        <button class="btn startItem" style="margin-right: 10px;">开启项目</button>
+        <button class="btn reconfigure" style="margin-right: 10px;">重新配置</button>
+      </div>
+      <%}else{%>
+      <div class="form">
+        <div class="form-title">
+          redis配置
+        </div>
+        <label>
+          <input type="text" class="input redis-input" id="redisHost" autocomplete="false" placeholder="redis的ip地址(必填)">
+        </label>
+        <label>
+          <input type="text" class="input redis-input" id="redisPort" autocomplete="false" placeholder="redis端口号(必填)">
+        </label>
+        <label>
+          <input type="text" class="input redis-input" id="redisPassword" autocomplete="false" placeholder="redis的密码(必填)">
+        </label>
+        <div class="u-f u-f-ac u-f-ajc">
+          <button class="btn connectRedis" style="margin-right:10px;">测试连接</button>
+          <div style="color:green;display: none" id="redis-status-success">redis连接成功!</div>
+          <div style="color:red;display: none" id="redis-status-fail">redis连接失败!</div>
+        </div>
+      </div>
+      <div class="form mysql-form-style" style="margin-top:30px;">
+        <div class="form-title">
+          mysql配置
+        </div>
+        <label>
+          <input type="text" class="input mysql-input" id="mysqlIp" autocomplete="false" placeholder="mysql的ip地址(必填)">
+        </label>
+        <label>
+          <input type="text" class="input mysql-input" id="mysqlPort" autocomplete="false" placeholder="mysql端口号(必填)">
+        </label>
+        <label>
+          <input type="text" class="input mysql-input" id="mysqlUser" autocomplete="false" placeholder="mysql用户名(必填)">
+        </label>
+        <label>
+          <input type="text" class="input mysql-input" id="mysqlPassword" autocomplete="false" placeholder="mysql密码(必填)">
+        </label>
+        <div class="u-f u-f-ac u-f-ajc">
+          <button class="btn connectMysql" style="margin-right: 10px;">测试连接</button>
+          <div style="color:green;display: none" id="mysql-status-success">mysql连接成功!</div>
+          <div style="color:red;display: none" id="mysql-status-fail">mysql连接失败!</div>
+        </div>
+      </div>
+      <div class="form importSql-form-style" style="margin-top:30px;">
+        <label>
+          <input type="file" class="importSql-input" name="sqlFile" id="sqlFile" accept=".sql" autocomplete="false">
+        </label>
+        <label>
+          <input type="text" class="input importSql-input" id="dbName" autocomplete="false" placeholder="数据库名(非必填)">
+        </label>
+        <div class="u-f u-f-ac u-f-ajc">
+          <button class="btn importDBase" style="margin-right: 10px;">导入数据库</button>
+          <div style="color:green;display: none" id="importSql-status-success">数据库导入成功!</div>
+          <div style="color:red;display: none" id="importSql-status-fail">数据库导入失败!</div>
+        </div>
+      </div>
+      <div class="u-f u-f-ac u-f-ajc" style="margin-top:20px;">
+        <button class="btn startItem startBtn" style="margin-right: 10px;">开启项目</button>
+      </div>
+      <%}%>
+
+  </div>
+
+  <script type="text/javascript" src="/js/axios.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script>
+    $(function() {
+      $('.loading-style').attr('style','display:none!important;');
+      $('.connectRedis').click(function() {
+        let redisHost = $('#redisHost').val().trim()
+        let redisPort = $('#redisPort').val().trim()
+        let redisPassword = $('#redisPassword').val().trim()
+        if(!redisHost || !redisPort || !redisPassword) {
+          alert('redis配置不能为空！');
+          return false;
+        }
+        $('.loading-style').show()
+        let data = new FormData()
+        data.append("redisHost",redisHost)
+        data.append("redisPort",redisPort)
+        data.append("redisPassword",redisPassword)
+        axios.post("/connectRedis",data).then(res=>{
+          let {msg,data,code} = res.data;
+          if(data==true){
+            $("#redis-status-success").show()
+            $("#redis-status-fail").hide()
+            $(".mysql-form-style").show()
+            $(".redis-input").attr("disabled","disabled");
+            $(".connectRedis").attr("disabled","disabled");
+          }else{
+            $("#redis-status-fail").hide()
+            $("#redis-status-fail").show()
+            $(".mysql-form-style").hide()
+            $(".importSql-form-style").hide()
+          }
+          $('.loading-style').attr('style','display:none!important');
+        })
+      });
+
+      $('.connectMysql').click(function() {
+        let mysqlIp = $('#mysqlIp').val().trim()
+        let mysqlPort = $('#mysqlPort').val().trim()
+        let mysqlUser = $('#mysqlUser').val().trim()
+        let mysqlPassword = $('#mysqlPassword').val().trim()
+        if(!mysqlIp || !mysqlPort || !mysqlUser || !mysqlPassword) {
+          alert('mysql配置不能为空！');
+          return false;
+        }
+        $('.loading-style').show()
+        let data = new FormData()
+        data.append("mysqlIp",mysqlIp)
+        data.append("mysqlPort",mysqlPort)
+        data.append("mysqlUser",mysqlUser)
+        data.append("mysqlPassword",mysqlPassword)
+        axios.post("/connectMysql",data).then(res=>{
+          let {msg,data,code} = res.data;
+          if(data==true){
+            $("#mysql-status-success").show()
+            $("#mysql-status-fail").hide()
+            $(".importSql-form-style").show()
+            $(".mysql-input").attr("disabled","disabled");
+            $(".connectMysql").attr("disabled","disabled");
+          }else{
+            $("#mysql-status-fail").hide()
+            $("#mysql-status-fail").show()
+            $(".importSql-form-style").hide()
+          }
+          $('.loading-style').attr('style','display:none!important');
+        })
+      });
+      $('.importDBase').click(function() {
+        let sqlFile = $('#sqlFile')[0].files[0];
+        let dbName = $('#dbName').val().trim()
+        let mysqlIp = $('#mysqlIp').val().trim()
+        let mysqlPort = $('#mysqlPort').val().trim()
+        let mysqlUser = $('#mysqlUser').val().trim()
+        let mysqlPassword = $('#mysqlPassword').val().trim()
+        let redisHost = $('#redisHost').val().trim()
+        let redisPort = $('#redisPort').val().trim()
+        let redisPassword = $('#redisPassword').val().trim()
+        if(!redisHost || !redisPort || !redisPassword || !mysqlIp || !mysqlPort || !mysqlUser || !mysqlPassword || !sqlFile) {
+          alert('配置不能为空！');
+          return false;
+        }
+        $('.loading-style').show()
+        let data = new FormData()
+        data.append("sqlFile",sqlFile)
+        data.append("redisHost",redisHost)
+        data.append("redisPort",redisPort)
+        data.append("redisPassword",redisPassword)
+        data.append("dbName",dbName)
+        data.append("mysqlIp",mysqlIp)
+        data.append("mysqlPort",mysqlPort)
+        data.append("mysqlUser",mysqlUser)
+        data.append("mysqlPassword",mysqlPassword)
+        axios.post("/importDBase",data).then(res=>{
+          let {msg,data,code} = res.data;
+          if(msg == 1 && data){
+            $("#importSql-status-success").show()
+            $("#importSql-status-fail").hide()
+            $(".connectMysql").hide()
+            $(".importSql-input").attr("disabled","disabled");
+            $(".connectRedis").attr("disabled","disabled");
+            $(".importDBase").attr("disabled","disabled");
+            $(".importDBase").attr("disabled","disabled");
+            $(".startBtn").attr("style","display:block;margin-right: 10px;");
+          }else if(msg == 2){//数据库存在
+            alert("数据库已存在，请清空再导入")
+          }else{
+            $("#importSql-status-fail").hide()
+            $("#importSql-status-fail").show()
+          }
+          $('.loading-style').attr('style','display:none!important');
+        })
+      });
+      $('.startItem').click(function() {
+        let isConfigItem = $('#isConfigItem').val()
+        if(isConfigItem == 1){
+          let data = new FormData()
+          data.append("isConfigItem",isConfigItem)
+          axios.post("/startItem",data).then(res=>{
+            console.log(res);
+            let {msg,data,code} = res.data;
+
+            $('.loading-style').attr('style','display:none!important');
+          })
+        }else{
+          let sqlFile = $('#sqlFile')[0].files[0];
+          let dbName = $('#dbName').val().trim()
+          let mysqlIp = $('#mysqlIp').val().trim()
+          let mysqlPort = $('#mysqlPort').val().trim()
+          let mysqlUser = $('#mysqlUser').val().trim()
+          let mysqlPassword = $('#mysqlPassword').val().trim()
+          let redisHost = $('#redisHost').val().trim()
+          let redisPort = $('#redisPort').val().trim()
+          let redisPassword = $('#redisPassword').val().trim()
+          if(!redisHost || !redisPort || !redisPassword || !mysqlIp || !mysqlPort || !mysqlUser || !mysqlPassword || !sqlFile) {
+            alert('mysql配置不能为空！');
+            return false;
+          }
+          $('.loading-style').show()
+          let data = new FormData()
+          data.append("sqlFile",sqlFile)
+          data.append("dbName",dbName)
+          data.append("mysqlIp",mysqlIp)
+          data.append("mysqlPort",mysqlPort)
+          data.append("mysqlUser",mysqlUser)
+          data.append("mysqlPassword",mysqlPassword)
+          data.append("redisHost",redisHost)
+          data.append("redisPort",redisPort)
+          data.append("redisPassword",redisPassword)
+          data.append("isConfigItem",isConfigItem)
+          axios.post("/startItem",data).then(res=>{
+            console.log(res);
+            let {msg,data,code} = res.data;
+
+            $('.loading-style').attr('style','display:none!important');
+          })
+        }
+      });
+      $('.reconfigure').click(function() {
+        if (window.confirm("是否确定要重新配置?")) {
+          $('.loading-style').show()
+          axios.post("/reconfigure").then(res=>{
+            console.log(res);
+
+            $('.loading-style').attr('style','display:none!important');
+            window.location.Reload()
+          })
+        }
+      });
+    });
+  </script>
+  </body>
+</html>

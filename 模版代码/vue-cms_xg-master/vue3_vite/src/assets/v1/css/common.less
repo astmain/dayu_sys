@@ -1,0 +1,584 @@
+//复杂计算就sass
+//宋体
+@font_SongTi : "\5B8B\4F53";
+//黑体
+@font_HeiTi : "\9ED1\4F53";
+//雅黑
+@font_YaHei : "\5FAE\8F6F\96C5\9ED1";
+
+// 边框阴影
+.box-shadow(@vars){
+  -webkit-box-shadow: @vars;
+  box-shadow: @vars;
+}
+
+.font-family("宋体"){
+  font-family: @font_SongTi, sans-serif;
+}
+.font-family("黑体"){
+  font-family: @font_HeiTi, sans-serif;
+}
+.font-family("微软雅黑"){
+  font-family: @font_YaHei, sans-serif;
+}
+.font-family(){
+  font-family: Tahoma, Helvetica, Arial, @font_SongTi, sans-serif;
+}
+
+// 块标记自动居中
+.block-center(block) {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.block-center() {
+  margin-left: auto;
+  margin-right: auto;
+}
+.block_center(){
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// 水平垂直居中（父元素需要加定位）
+.center{
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  margin:auto;
+}
+// 行内快
+.inline_block{
+  display: inline-block;
+  zoom:1;
+}
+.inline-block{
+  display: inline-block;
+  zoom:1;
+}
+// 边框阴影
+.box-shadow(@vars){
+  -moz-box-shadow: @vars; /* 老的 Firefox */
+  box-shadow: @vars;
+}
+
+// 盒子初始化，(宽[,高])
+.box-init(@w: 0) when (isnumber(@w)) and (@w > 0) {
+  width: @w;
+}
+
+.box-init(@w: 0,
+@h: 0) when (isnumber(@w)) and (@w > 0) and (isnumber(@h)) and (@h > 0) {
+  width: @w;
+  height: @h;
+}
+
+// 超链接样式，(默认颜色[,选中颜色])
+.link(@col: #7c7c7c) when (iscolor(@col)) {
+  & {
+    color: @col;
+  }
+}
+
+.link(@col: #7c7c7c,
+@hovcol: #e74c3c) when (iscolor(@col)) and (iscolor(@hovcol)) {
+  & {
+    color: @col;
+  }
+  &:hover {
+    color: @hovcol;
+  }
+}
+
+// ——————透明度，(0~100)——————
+.alpha(@int: 50) when (isnumber(@int)) and (@int >= 0) and (@int <= 100) {
+  @f: @int/100;
+  filter: alpha(opacity=@int);
+  -moz-opacity: @f;
+  opacity: @f;
+  zoom: 1;
+}
+
+.opacity(@int: 50) when (isnumber(@int)) and (@int >= 0) and (@int <= 100) {
+  @f: @int/100;
+  filter: alpha(opacity=@int);
+  -moz-opacity: @f;
+  opacity: @f;
+  zoom: 1;
+}
+
+// 三角形-下
+.triangle-bottom(@width,
+@height,
+@bgColor) {
+  @_w: @width/2;
+  width: 0;
+  height: 0;
+  line-height: 0;
+  overflow: hidden;
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  border-color: @bgColor transparent transparent transparent;
+  border-style: solid dashed dashed dashed;
+  border-width: ~'@{height}px @{_w}px 0 @{_w}px';
+}
+
+// ——————圆形，(长度，颜色)——————
+.circle(@length: 50px,
+@color: gray) when (isnumber(@length)) and (iscolor(@color)) {
+  display: block;
+  background-color: @color;
+  border-radius: 50%;
+  width: @length;
+  height: @length;
+}
+
+// ——————椭圆——————
+.ellipse(@w: 50px,@h: 25px,@color: gray) when (isnumber(@w)) and (isnumber(@h)) and(iscolor(@color)) {
+  display: block;
+  background-color: @color;
+  border-radius: 50%;
+  width: @w;
+  height: @h;
+}
+
+
+// ——————变形——————
+.transform(@func) {
+  /*
+  对元素进行旋转、缩放、移动或倾斜。
+  none	定义不进行转换。
+matrix(n,n,n,n,n,n)	定义 2D 转换，使用六个值的矩阵。
+matrix3d(n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n)	定义 3D 转换，使用 16 个值的 4x4 矩阵。
+translate(x,y)	定义 2D 转换。
+translate3d(x,y,z)	定义 3D 转换。
+translateX(x)	定义转换，只是用 X 轴的值。
+translateY(y)	定义转换，只是用 Y 轴的值。
+translateZ(z)	定义 3D 转换，只是用 Z 轴的值。
+scale(x,y)	定义 2D 缩放转换。
+scale3d(x,y,z)	定义 3D 缩放转换。
+scaleX(x)	通过设置 X 轴的值来定义缩放转换。
+scaleY(y)	通过设置 Y 轴的值来定义缩放转换。
+scaleZ(z)	通过设置 Z 轴的值来定义 3D 缩放转换。
+rotate(angle)	定义 2D 旋转，在参数中规定角度。
+rotate3d(x,y,z,angle)	定义 3D 旋转。
+rotateX(angle)	定义沿着 X 轴的 3D 旋转。
+rotateY(angle)	定义沿着 Y 轴的 3D 旋转。
+rotateZ(angle)	定义沿着 Z 轴的 3D 旋转。
+skew(x-angle,y-angle)	定义沿着 X 和 Y 轴的 2D 倾斜转换。
+skewX(angle)	定义沿着 X 轴的 2D 倾斜转换。
+skewY(angle)	定义沿着 Y 轴的 2D 倾斜转换。
+perspective(n)	为 3D 转换元素定义透视视图。
+  */
+
+  transform: @func;
+  -ms-transform: @func;
+  /* IE 9 */
+
+  -moz-transform: @func;
+  /* Firefox */
+
+  -webkit-transform: @func;
+  /* Safari 和 Chrome */
+
+  -o-transform: @func;
+  /* Opera */
+}
+
+// ——————过度效果——————
+.transition(@vars) {
+  /*
+  1.过渡效果：none 无过度，all 所有属性都将获得过渡效果，property 定义应用过渡效果的 CSS 属性名称列表，列表以逗号分隔
+  2.过度效果耗时
+  3.效果曲线：linear 以相同速度始终，ease 慢快慢，ease-in 慢始，ease-out 慢终，ease-in-out 慢始慢终，cubic-bezier(n,n,n,n)  0 至 1 之间的数值
+  */
+
+  transition: @vars;
+  -moz-transition: @vars;
+  -webkit-transition: @vars;
+  -o-transition: @vars;
+}
+
+// ——————创建动画——————
+.animation(@vars) {
+  /*
+  animation 属性简写
+  1.animation-name：规定需要绑定到选择器的 keyframe 名称
+  2.animation-duration：规定完成动画所花费的时间，以秒或毫秒计
+  3.animation-timing-function：规定动画的速度曲线
+  4.animation-delay：规定在动画开始之前的延迟
+  5.animation-iteration-count：规定动画应该播放的次数
+  6.animation-direction：规定是否应该轮流反向播放动画
+  */
+
+  animation: @vars;
+  /* Firefox */
+
+  -moz-animation: @vars;
+  /* Safari and Chrome */
+
+  -webkit-animation: @vars;
+  /* Opera */
+
+  -o-animation: @vars;
+}
+
+// ——————动画开始时间——————
+.animat_sleep(@time: 2s) {
+  animation-delay: @time;
+  /* Safari 和 Chrome */
+
+  -webkit-animation-delay: @time;
+}
+
+// ——————动画-放射，支持IE9+——————
+.animat_changeRadiate(@name) {
+  @keyframes @name {
+    0% {
+      transform: scale(.222);
+      .opacity(100);
+    }
+    50% {
+      transform: scale(.622);
+      .opacity(40);
+    }
+    98% {
+      transform: scale(1);
+      .opacity(20);
+    }
+    100% {
+      .opacity(0);
+    }
+  }
+  /* Firefox */
+
+  @-moz-keyframes @name {
+    0% {
+      -moz-transform: scale(.222);
+      .opacity(100);
+    }
+    50% {
+      -moz-transform: scale(.622);
+      transform: scale(.622);
+      .opacity(40);
+    }
+    98% {
+      -moz-transform: scale(1);
+      transform: scale(1);
+      .opacity(20);
+    }
+    100% {
+      .opacity(0);
+    }
+  }
+  /* Safari and Chrome */
+
+  @-webkit-keyframes @name {
+    0% {
+      -webkit-transform: scale(.222);
+      transform: scale(.222);
+      .opacity(100);
+    }
+    50% {
+      -webkit-transform: scale(.622);
+      transform: scale(.622);
+      .opacity(40);
+    }
+    98% {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+      .opacity(20);
+    }
+    100% {
+      .opacity(0);
+    }
+  }
+  /* Opera */
+
+  @-o-keyframes @name {
+    0% {
+      -o-transform: scale(.222);
+      transform: scale(.222);
+      .opacity(100);
+    }
+    50% {
+      -o-transform: scale(.622);
+      transform: scale(.622);
+      .opacity(40);
+    }
+    98% {
+      -o-transform: scale(1);
+      transform: scale(1);
+      .opacity(20);
+    }
+    100% {
+      .opacity(0);
+    }
+  }
+  /* IE9 */
+
+  @-o-keyframes @name {
+    0% {
+      -ms-transform: scale(.222);
+      transform: scale(.222);
+      .opacity(100);
+    }
+    50% {
+      -ms-transform: scale(.622);
+      transform: scale(.622);
+      .opacity(40);
+    }
+    98% {
+      -ms-transform: scale(1);
+      transform: scale(1);
+      .opacity(20);
+    }
+    100% {
+      .opacity(0);
+    }
+  }
+}
+
+// 动画-色彩渐变
+.animat_changeColor(@name,
+@col1,
+@col2,
+@col3,
+@col4) {
+  @keyframes @name {
+    0% {
+      background: @col1;
+    }
+    25% {
+      background: @col2;
+    }
+    50% {
+      background: @col3;
+    }
+    100% {
+      background: @col4;
+    }
+  }
+  /* Firefox */
+
+  @-moz-keyframes @name {
+    0% {
+      background: @col1;
+    }
+    25% {
+      background: @col2;
+    }
+    50% {
+      background: @col3;
+    }
+    100% {
+      background: @col4;
+    }
+  }
+  /* Safari and Chrome */
+
+  @-webkit-keyframes @name {
+    0% {
+      background: @col1;
+    }
+    25% {
+      background: @col2;
+    }
+    50% {
+      background: @col3;
+    }
+    100% {
+      background: @col4;
+    }
+  }
+  /* Opera */
+
+  @-o-keyframes @name {
+    0% {
+      background: @col1;
+    }
+    25% {
+      background: @col2;
+    }
+    50% {
+      background: @col3;
+    }
+    100% {
+      background: @col4;
+    }
+  }
+}
+
+// 动画-起伏
+.animat_fluctuate(@name) {
+  @-webkit-keyframes @name {
+    0% {
+      -webkit-transform: translateY(0);
+    }
+    100% {
+      -webkit-transform: translateY(20%);
+    }
+  }
+  @-ms-keyframes @name {
+    0% {
+      -ms-transform: translateY(0);
+    }
+    100% {
+      -ms-transform: translateY(20%);
+    }
+  }
+  @-moz-keyframes @name {
+    0% {
+      -moz-transform: translateY(0);
+    }
+    100% {
+      -moz-transform: translateY(20%);
+    }
+  }
+  @-o-keyframes @name {
+    0% {
+      -o-transform: translateY(0);
+    }
+    100% {
+      -o-transform: translateY(20%);
+    }
+  }
+  @keyframes @name {
+    0% {
+      transform: translateY(0)
+    }
+    100% {
+      transform: translateY(20%)
+    }
+  }
+}
+
+
+// 动画-起伏影子，(动画名，最小宽度，最小高度，放大倍数)
+.animat_shadow(@name,@w_min:50px,@h_min:10px,@mulriple:2) {
+  @-webkit-keyframes @name {
+    0% {
+      width: @w_min;
+      height: @h_min;
+      .opacity(60);
+    }
+    100% {
+      width: @w_min * @mulriple;
+      height: @h_min * @mulriple;
+      .opacity(80);
+    }
+  }
+  @-ms-keyframes @name {
+    0% {
+      width: @w_min;
+      height: @h_min;
+      .opacity(60);
+    }
+    100% {
+      width: @w_min * @mulriple;
+      height: @h_min * @mulriple;
+      .opacity(80);
+    }
+  }
+  @-moz-keyframes @name {
+    0% {
+      width: @w_min;
+      height: @h_min;
+      .opacity(60);
+    }
+    100% {
+      width: @w_min * @mulriple;
+      height: @h_min * @mulriple;
+      .opacity(80);
+    }
+  }
+  @-o-keyframes @name {
+    0% {
+      width: @w_min;
+      height: @h_min;
+      .opacity(60);
+    }
+    100% {
+      width: @w_min * @mulriple;
+      height: @h_min * @mulriple;
+      .opacity(60);
+    }
+  }
+  @keyframes @name {
+    0% {
+      width: @w_min;
+      height: @h_min;
+      .opacity(60);
+    }
+    100% {
+      width: @w_min * @mulriple;
+      height: @h_min * @mulriple;
+      .opacity(80);
+    }
+  }
+}
+
+//圆形，波纹放射效果
+.create_circle(@len:72px,@bgcl:#fff,@runtime:1.2s){
+  // 容器边长
+  @_side_len: @len;
+  // 圆形颜色
+  @_bgcolor: @bgcl;
+  // 内圆大小，1号圆
+  @_circle_inner: @_side_len / 4.5;
+  // 外圆大小，2号圆、3号圆
+  @_circle_external: @_side_len;
+  // 始终让内圆保持居中定位
+  @_top: (@_circle_external / 2)-(@_circle_inner / 2);
+  @_left: @_top;
+  // 动画名称，2号圆、3号圆
+  @_name2: circle_2;
+  @_name3: circle_3;
+  // 动画每次运行时间
+  @_time: @runtime;
+  // 初始化休眠时长，2号圆、3号圆
+  @_sleep_time2: 0.6s;
+  @_sleep_time3: 1.2s;
+
+  width: @_side_len;
+  height: @_side_len;
+  position: absolute;
+
+  div{
+    position: absolute;
+  }
+  .u-c1{
+    /*画一个圆*/
+    .circle(@_circle_inner,@_bgcolor);
+    margin: @_top 0 0 @_left;
+  }
+  .u-c2{
+    /*画一个圆*/
+    .circle(@_circle_external,@_bgcolor);
+    /*创建动画*/
+    .animation(@_name2 @_time linear infinite);
+    /*睡一会再执行*/
+    .animat_sleep(@_sleep_time2);
+    /*放射效果*/
+    .animat_changeRadiate(@_name2);
+  }
+  .u-c3{
+    /*画一个圆*/
+    .circle(@_circle_external,@_bgcolor);
+    /*创建动画*/
+    .animation(@_name3 @_time linear infinite);
+    /*睡一会再执行*/
+    .animat_sleep(@_sleep_time3);
+    /*放射效果*/
+    .animat_changeRadiate(@_name3);
+  }
+}
+
+//外边距
+.margin-right(){
+
+}

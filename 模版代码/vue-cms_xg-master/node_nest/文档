@@ -1,0 +1,158 @@
+1.nestjs 中使用 class-validator
+验证器装饰器
+https://juejin.cn/post/7055314455868997646
+
+2.nestjs中使用jwt   策略使用
+
+3.IOC是什么
+依赖注入
+
+4.
+中间件
+    1.修改原始的request和response对象
+拦截器
+    1.对返回的结果进行转换
+过滤器
+    1.对接口抛出的异常进行二次处理
+
+5.typeorm 开启事务的注意事项
+开始事务可以使用装饰器修饰，无需手动提交和回滚，释放
+typeorm在使用getConnection或者connection提交事务时，最后需要释放
+https://blog.csdn.net/weixin_44828005/article/details/116477232
+
+6.nestjs class-validator dto(数据传输对象) 设置默认值
+https://www.coder.work/article/2669499
+
+7.设置语言切换 i18n
+https://juejin.cn/post/7040375938483224606#heading-1
+
+vue3在单独的js文件中使用pinia报错
+https://www.cnblogs.com/xsj1989/p/16712066.html
+重新在这个js文件中注册一下pinia
+前端页面src/plugins/v1/i18n/index.ts
+
+
+8.本地文件大小写修改，上传到gitee代码仓库无效
+解决办法:
+关闭git忽略大小写配置，即可检测到大小写名称更改。
+git config core.ignorecase false
+
+9.使用mavon-editor插件构建markdown编辑器(制作中)
+  https://juejin.cn/post/7180185301195685947
+  mavon-editor优化
+  https://www.spacecadet.cc/admin/article?id=9
+
+10.mysql 使用保留字段注意事项
+格式:(表明.保留字段)
+select * from xx from xx.key=="沉默小管"
+
+10.前端创建组件，不能使用关键词(style,int,image等)传值
+
+11.自定义装饰器命令行
+nest g d ./common/decorators/log
+nest g d [name]
+
+12.typeorm 查询中getOne getRawOne的区别
+使用查询构建器查询可以获得两种类型的结果：entities 或 raw results。
+大多数情况下，你只需要从数据库中选择真实实体，例如 users。 为此，你可以使用getOne和getMany。
+但有时你需要选择一些特定的数据，比方说所有sum of all user photos。
+此数据不是实体，它称为原始数据。
+要获取原始数据，请使用getRawOne和getRawMany
+
+13.vue3 单文件组件状态驱动的css变量(<style vars>)
+https://blog.csdn.net/qq_21567385/article/details/109590304
+
+14.mysql 运行机制类型
+https://zhuanlan.zhihu.com/p/343100456
+
+15.docker安装vue3前端项目
+环境是node16，不需要安装node-sass
+https://blog.csdn.net/qq_43223007/article/details/119798209
+
+16.nginx配置访问动态图片 访问失效 nginx 404
+nginx proxy_pass 404 找不到动态图片
+解决办法修改nginx反向代理配置
+https://www.cnblogs.com/yanggb/p/14129326.html
+
+17.nodejs js的区别
+
+18.git如何删除提交记录，并回滚
+https://blog.csdn.net/qq_36977923/article/details/121967401
+
+19.svg图标 修改颜色
+使用css中的fill修改svg颜色
+组件中<svgIcon/>有使用
+
+20.项目配置cdn放到线上访问出现
+Failed to resolve module specifier "vue". Relative references must start with either "/", "./", or "../".
+
+pinia依赖了vue的vue-demi模块，但是cdn后不会把demi模块打包进去，所以会报错，我把demi的cdn加上去就行了。
+
+取消vue自动加载(前端项目/vite/plugins/autoImport.ts)
+
+https://juejin.cn/post/6992027986383863838
+
+21.国内免费cdn
+BootCDN: www.bootcdn.cn
+七牛云: www.staticfile.org
+360: cdn.baomitu.com
+字节跳动: cdn.bytedance.com
+jsDelivr: www.jsdelivr.com
+
+22.element-plus打包 打包不了，需要把element-plus组件按需导入注释掉(vite/plugins/autoImport.ts)
+
+引入问题
+https://juejin.cn/post/7056661461069725727
+
+23.esm和cjs区别
+https://juejin.cn/post/6974404976022192141
+
+24.前端放到线上需要把@vue/runtime-core引入改为vue
+
+线上使用vue的cdn加载时，需要把@vue/runtime-core引入改为vue
+
+25.md里的图标集合
+https://gitcode.net/mirrors/zhouie/markdown-emoji?utm_source=csdn_github_accelerator
+
+26.监控服务器
+nestjs
+https://juejin.cn/post/7067450581337505806
+
+27.nestjs项目讲解
+https://juejin.cn/post/7078847428455530526#heading-9
+
+28.js变量提升 问题
+https://juejin.cn/post/7007224479218663455
+
+29.封装组件注意事项
+
+30.同步和异步同时进行时，并发会出现问题。该如何解决
+
+31.js中then（）的用法
+
+32.nestjs技术讲解
+https://wdk-docs.github.io/nest-docs/custom-decorators/#param
+
+33.nestjs即时通信，需要版本一致
+@nestjs/core
+@nestjs/platform-socket.io
+@nestjs/websockets
+一样的版本
+
+34.nestjs即使通信 制作流程
+特别注意第三方插件版本问题（@nestjs/platform-socket.io与@nestjs/websockets版本一致）！！！导致总是重新链接
+
+https://juejin.cn/post/7045991128641830942
+https://www.cnblogs.com/China-Dream/p/15827701.html
+https://cloud.tencent.com/developer/article/1910836
+
+35.md-editor-v3 详细简介
+https://juejin.cn/post/6991731267909713928
+
+36.Dom树 CSS树 渲染树(render树) 规则、原理
+https://blog.csdn.net/weixin_45820444/article/details/109013996
+
+37.nest-status-monitor监控页面无效果
+https://gitee.com/JYbill/nest8-websocket7-status-monitor
+
+

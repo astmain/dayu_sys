@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "noImplicitAny": false, //关闭any提示
+    "useDefineForClassFields": true,
+    "suppressImplicitAnyIndexErrors":true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "jsx": "preserve",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "lib": ["ESNext", "DOM"],
+    "skipLibCheck": true,
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@/views/*": ["./src/views/v1/*"],
+      "@/assets/*": ["./src/assets/v1/*"],
+      "@/components/*": ["./src/components/v1/*"],
+      "@/commonNetwork/*": ["./src/network/*"],
+      "@/network/*": ["./src/network/v1/*"],
+      "@/router/*": ["./src/router/v1/*"],
+      "@/store/*": ["./src/store/v1/*"],
+      "@/plugins/*": ["./src/plugins/v1/*"],
+      "@/utils/*": ["./src/utils/v1/*"],
+      "@/interface/*": ["./src/interface/v1/*"]
+    },
+    "types": ["element-plus/global"]//指定全局组件类型
+  },
+  //需要将此文件添加到tsconfig.json中，否则在使用api时会提示未定义
+  "include": [ "vite.config.ts","src/**/*.ts", "types/*.d.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "exclude": ["node_modules", "dist"]
+}

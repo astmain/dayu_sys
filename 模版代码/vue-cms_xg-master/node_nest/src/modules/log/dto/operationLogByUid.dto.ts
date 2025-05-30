@@ -1,0 +1,36 @@
+//*- coding = utf-8 -*-
+//@Time : 2022-11-15 19:57
+//@Author : 沉默小管
+//@File : menuList.dto.js
+//@web  : golangblog.blog.csdn.net
+//@Software: WebStorm
+
+import { IsInt, IsNotEmpty, IsString } from "class-validator";
+import { ApiProperty } from "@nestjs/swagger";
+
+export class OperationLogByUidDto {
+  //操作员id
+  @ApiProperty({
+    description: '操作员id',
+    type:Number,
+  })
+  uid:string;
+
+  //一页显示条数
+  @ApiProperty({
+    description: '一页的数量',
+    type:Number,
+  })
+  @IsInt({message:"pageSize需要传为整数"})
+  @IsNotEmpty({ message: 'pageSize不允许为空' })
+  pageSize:number=999;
+
+  //当前页码
+  @ApiProperty({
+    description: '当前页数',
+    type:Number,
+  })
+  @IsInt({message:"currentPage需要传为整数"})
+  @IsNotEmpty({ message: 'currentPage不允许为空' })
+  currentPage:number=1;
+}
