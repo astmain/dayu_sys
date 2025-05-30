@@ -1,5 +1,5 @@
-import {Body, Controller, Get, Inject, Post, Req, Res, UploadedFile, UseInterceptors} from '@nestjs/common';
-import {ApiBearerAuth, ApiOperation, ApiTags} from '@nestjs/swagger';
+import {Body, Controller, Get, Inject, Post, Query, Req, Res, UploadedFile, UseInterceptors} from '@nestjs/common';
+import {ApiBearerAuth, ApiOperation, ApiProperty, ApiTags} from '@nestjs/swagger';
 import {join} from 'path';
 import axios from 'axios';
 // import {zip} from 'compressing'
@@ -10,6 +10,7 @@ import * as dayjs from 'dayjs';
 // 自定义
 import tool from "../../tool"
 import * as file_upload_TDO from "./file_upload_TDO"
+// import {img_url_DTO} from "./file_upload_TDO";
 
 console.log(`111---aaa:`, globalThis["aaa"])
 console.log(`111---bbb:`, globalThis["bbb"])
@@ -33,7 +34,7 @@ export class file_upload {
     @Post("/file_upload_find_list")
     async file_upload_find_list() {
         let list = await this.db.tb_static.findMany()
-        list= list.map(o => ({...o, createdAt: dayjs(o.createdAt).format('YYYY-MM-DD HH:mm:ss'),}));
+        list = list.map(o => ({...o, createdAt: dayjs(o.createdAt).format('YYYY-MM-DD HH:mm:ss'),}));
         return this.tools.R.ok({msg: "成功/file_upload_find_list", result: {list}})
     }
 
@@ -147,8 +148,19 @@ export class file_upload {
     @ApiOperation({summary: '文件下载流-等待开发'})
     @Post("/download_stream")
     async download_stream() {
-
         return this.tools.R.ok({msg: "成功", result: {}})
+    }
+
+
+    @ApiOperation({summary: '图片url转base64',})
+    // @ApiProperty({ type: String, description: '发票类型-[增值税普通发票,增值税专用发票]', example: 'https://gitee.com/astmain/static/raw/master/pay/unpaid_qr_code.jpg', required: true })
+    @Get("/img_url_to_base64")
+    async img_url_to_base64(@Query() img_url: file_upload_TDO.img_url_DTO) {
+        let base64 = await this.tools.fs_img_url_to_base64("https://gitee.com/astmain/static/raw/master/pay/unpaid_qr_code.jpg")
+        // console.log(`111---base64:`, base64)
+        return base64
+        // return this.tools.R.ok({msg: "成功", result: {}})
+        // return this.tools.R.ok({msg: "成功", result: {}})
     }
 
 

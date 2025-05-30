@@ -21,9 +21,19 @@ class del {
     id: number = 0;
 
 }
+
+
+class img_url_DTO {
+    @ApiProperty({type: String, description: '图片url', default: "https://gitee.com/astmain/static/raw/master/pay/unpaid_qr_code.jpg",  required: true,})
+    @IsNotEmpty()
+    @IsString()
+    img_url: string;
+}
+
 export {
     update,
-    del
+    del,
+    img_url_DTO
 }
 
 

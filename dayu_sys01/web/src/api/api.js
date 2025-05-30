@@ -233,6 +233,7 @@ async function goods_car_del({id}) {
     res.code === 200 ? ElMessage.success({message: res.msg, duration: 1000, showClose: true}) : 0
     return
 }
+
 // 更新-购物车
 async function goods_car_update({name, img_url, num, id}) {
     let tag = "goods_car_update"
@@ -253,6 +254,7 @@ async function goods_order_create({price, details}) {
     res.code === 200 ? ElMessage.success({message: res.msg, duration: 1000, showClose: true}) : 0
     return res
 }
+
 async function goods_order_find_list() {
     let tag = "goods_order_find_list"
     let config = {method: "post", url: "/goods_order/goods_order_find_list", data: {}}
@@ -274,7 +276,12 @@ async function goods_order_del(id) {
 }
 
 
+async function img_url_to_base64(img_url) {
+    let config = {method: "get", url: `/file_upload/img_url_to_base64?img_url=${img_url}`}
+    const res = await axios_api(config)
+    return res
 
+}
 
 
 let api = {
@@ -284,6 +291,7 @@ let api = {
     // tb_role: require("./tb_role"),
     // 上传文件=====================================
     file_upload_one, file_delete, file_upload_one_3d, file_upload_find_list,
+    img_url_to_base64,
     // 扁平化api=====================================
     find_depart_role_tree, find_permiss_menu_tree,
     //角色

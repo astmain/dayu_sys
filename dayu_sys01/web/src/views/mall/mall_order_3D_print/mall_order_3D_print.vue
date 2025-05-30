@@ -260,8 +260,13 @@ export default {
       let res = await this.api.goods_order_create(data)
       if (res.code === 200) {
         console.log(`请支付--- res.one :`, res.one)
+        BUS.bus_unpaid_pay.data = res.one
+        BUS.bus_unpaid_pay.show = true
+
+
         // alert("请支付")
         this.$router.push("/mall_order_my")
+
       }
     },//
 

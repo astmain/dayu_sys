@@ -6,6 +6,7 @@ import {ApiBearerAuth, ApiBody, ApiParam} from '@nestjs/swagger';
 // 自定义
 import tool from "../../tool"
 import * as goods_order_TDO from './goods_order_TDO';
+import * as dayjs from "dayjs";
 
 
 @ApiTags('订单管理')
@@ -45,7 +46,8 @@ export class goods_order {
     @ApiOperation({summary: '查询-订单-list'})
     async find_list(@Body() body: goods_order_TDO.find, @Req() req) {
         console.log(`goods_order_find_list---body:`, body);
-        let list = await this.db.tb_goods_order.findMany()
+        let list = await this.db.tb_goods_order.findMany({orderBy: {createdAt: 'desc',}})
+        list = list.map(o => ({...o, createdAt: dayjs(o.createdAt).format('YYYY-MM-DD HH:mm:ss')}))
         return this.tools.AjaxResult.ok('成功:查询-订单-list', {count: list?.length, list})
     }
 

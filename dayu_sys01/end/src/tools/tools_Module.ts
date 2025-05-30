@@ -11,6 +11,7 @@ import {Get_form} from './Get_form';
 import {price_1_make} from "./price_1_make";
 import {R} from './R';
 import {AjaxResult} from "./AjaxResult";
+import {fs_img_url_to_base64} from "./fs_img_url_to_base64";
 
 export const tools = {
     build_tree,
@@ -23,6 +24,7 @@ export const tools = {
     price_1_make,
     R,
     AjaxResult,
+    fs_img_url_to_base64,
 }
 
 
