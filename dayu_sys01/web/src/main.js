@@ -32,6 +32,15 @@ require('@src/api/api.js')
 window.utils = require('@src/utils/index.js')
 
 
+app.directive('img', (el, binding) => {
+    el.style.width = binding.value.width || '100px'
+    api.img_url_to_base64(binding.value.src).then(base64 => {
+        // console.log(`111---base64:`, base64)
+        el.src = base64
+    })
+
+});
+
 app.mount('#app')
 
 

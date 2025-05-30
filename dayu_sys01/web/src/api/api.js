@@ -277,8 +277,9 @@ async function goods_order_del(id) {
 
 
 async function img_url_to_base64(img_url) {
-    let config = {method: "get", url: `/file_upload/img_url_to_base64?img_url=${img_url}`}
+    let config = {method: "post", url: `/file_upload/img_url_to_base64` ,data:{img_url:img_url}}
     const res = await axios_api(config)
+    console.log(`111---img_url_to_base64:`,     333        )
     return res
 
 }

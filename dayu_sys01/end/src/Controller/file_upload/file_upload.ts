@@ -151,14 +151,17 @@ export class file_upload {
         return this.tools.R.ok({msg: "成功", result: {}})
     }
 
-
+    @tool.Dec_public()
     @ApiOperation({summary: '图片url转base64',})
     // @ApiProperty({ type: String, description: '发票类型-[增值税普通发票,增值税专用发票]', example: 'https://gitee.com/astmain/static/raw/master/pay/unpaid_qr_code.jpg', required: true })
-    @Get("/img_url_to_base64")
-    async img_url_to_base64(@Query() img_url: file_upload_TDO.img_url_DTO) {
-        let base64 = await this.tools.fs_img_url_to_base64("https://gitee.com/astmain/static/raw/master/pay/unpaid_qr_code.jpg")
+    @Post("/img_url_to_base64")
+    async img_url_to_base64(@Body() body: file_upload_TDO.img_url_DTO) {
+        // console.log(`111---img_url:`, body)
+        // let base64 = await this.tools.fs_img_url_to_base64("https://img2.baidu.com/it/u=1067594889,3904550527&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500\n")
+        let base64 = await this.tools.fs_img_url_to_base64(body.img_url)
         // console.log(`111---base64:`, base64)
         return base64
+        // return this.tools.R.ok({msg: "成功", result: {base64}})
         // return this.tools.R.ok({msg: "成功", result: {}})
         // return this.tools.R.ok({msg: "成功", result: {}})
     }

@@ -22,7 +22,7 @@ async function getImageAsBase64(url) {
 
         // 构建完整的Data URI格式
         const dataUri = `data:${contentType};base64,${base64}`;
-
+        console.log(`111---dataUri:`, dataUri)
         return dataUri;
     } catch (error) {
         console.error('获取图片时出错:', error.message);
@@ -32,7 +32,7 @@ async function getImageAsBase64(url) {
 
 // 使用示例
 async function main() {
-    const imageUrl = 'https://example.com/image.jpg'; // 替换为实际的图片URL
+    const imageUrl = 'https://img2.baidu.com/it/u=1067594889,3904550527&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500\n'; // 替换为实际的图片URL
 
     try {
         const base64Image = await getImageAsBase64(imageUrl);
