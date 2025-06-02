@@ -3,17 +3,10 @@ import {Put, Param, Delete, HttpCode} from '@nestjs/common';
 import {ApiTags, ApiOperation, ApiResponse, ApiQuery} from '@nestjs/swagger';
 import {ApiBearerAuth, ApiBody, ApiParam} from '@nestjs/swagger';
 // 自定义
-
-import {PrismaClient} from "@prisma/client";
 import tool from "./tool";
-let db = new PrismaClient()
-
-import  {Service_test} from "./Service/Service_test"
+import {Service_test} from "./Service/Service_test"
 
 
-
-// @ApiTags('app')
-// @ApiBearerAuth('Authorization')
 @Controller("app")
 export class appController {
     constructor(private readonly service_test: Service_test) {
