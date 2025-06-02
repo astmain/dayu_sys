@@ -1,8 +1,7 @@
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'; //怎么设置addGlobalParameters
-import { knife4jSetup } from 'nest-knife4j';
+import {SwaggerModule, DocumentBuilder} from '@nestjs/swagger'; //怎么设置addGlobalParameters
+import {knife4jSetup} from 'nest-knife4j';
 // 自定义
-import { conf } from './conf';
-
+import {conf} from './conf';
 
 
 export async function swagger(app) {
@@ -16,7 +15,7 @@ export async function swagger(app) {
             in: 'header',
             description: 'token',
             required: true,
-            schema: { type: "string", default: "token", }
+            schema: {type: "string", default: "token",}
         })
         .build();
 
@@ -25,14 +24,18 @@ export async function swagger(app) {
     SwaggerModule.setup('/api/swagger', app, document);
     knife4jSetup(app, [
         {
-            name: "1111",
+            name: "doc_111",
+            url: `/api/swagger-json`,
+            swaggerVersion: conf.version,
+            location: `/api/swagger-json`,
+        },
+        {
+            name: "doc_222",
             url: `/api/swagger-json`,
             swaggerVersion: conf.version,
             location: `/api/swagger-json`,
         },
     ]);
-
-
 
 
     return `

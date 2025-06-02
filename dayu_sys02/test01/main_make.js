@@ -3,8 +3,8 @@ import * as path from 'path'
 import dayjs from 'dayjs'
 
 
-let name = "test1"//文件夹名称  
-let tag = "测试1"//文档名称
+let name = "user2"//文件夹名称
+let tag = "用户2"//文档名称
 
 
 let Controller = `
@@ -115,28 +115,22 @@ export { ${name}_create, ${name}_delete, ${name}_update, ${name}_find, }
 `
 
 
-
-
-
-
 async function make_dir() {
     try {
         const dirName = `new_${name}__` + dayjs().format('YYYY-MM-DD-HH-mm-ss');
         const dir_path = path.join(process.cwd(), dirName, name);
-        fs.mkdirSync(dir_path, { recursive: true });
-        fs.mkdirSync(path.join(process.cwd(), dirName, "demo"), { recursive: true });
+        fs.mkdirSync(dir_path, {recursive: true});
+        fs.mkdirSync(path.join(process.cwd(), dirName, "demo"), {recursive: true});
         console.log('dir_path---:', dir_path)
         const dto_path = path.join(dir_path, 'dto');
-        fs.mkdirSync(dto_path, { recursive: true });
+        fs.mkdirSync(dto_path, {recursive: true});
         console.log('dto_path---:', dto_path)
         console.log(`111-文件夹-已成功创建！`);
-        return { dir_path, dto_path };
+        return {dir_path, dto_path};
     } catch (err) {
         console.error('创建文件夹时出错：', err);
     }
 }
-
-
 
 
 async function make_Controller(dir_path) {
@@ -148,7 +142,6 @@ async function make_Controller(dir_path) {
         console.error('创建文件夹时出错：', err);
     }
 }
-
 
 
 async function make_module(dir_path) {
@@ -176,10 +169,8 @@ async function make_dto(dto_path) {
 }
 
 
-
-
 async function main_make() {
-    let { dir_path, dto_path } = await make_dir()
+    let {dir_path, dto_path} = await make_dir()
     await make_Controller(dir_path)
     await make_module(dir_path)
     await make_dto(dto_path)
