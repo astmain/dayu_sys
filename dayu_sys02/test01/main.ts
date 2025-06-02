@@ -14,8 +14,6 @@ async function main() {
     // 配置打印
     console.log(Config.conf.project.description)
     console.log(Config.conf.files.description)
-
-
 }
 
 main();
