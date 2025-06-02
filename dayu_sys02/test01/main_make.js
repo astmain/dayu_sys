@@ -7,8 +7,7 @@ let name = "user2"//文件夹名称
 let tag = "用户2"//文档名称
 
 
-let Controller = `
-import { Controller, Get,Post,Body,Req } from '@nestjs/common';
+let Controller = `import { Controller, Get,Post,Body,Req } from '@nestjs/common';
 import {ApiTags, ApiOperation, ApiResponse, ApiQuery} from '@nestjs/swagger';
 import {ApiBearerAuth, ApiBody, ApiParam} from '@nestjs/swagger';
 // 自定义
@@ -46,8 +45,7 @@ export class ${name} {
 }
 `
 
-let module = `
-import { Module } from '@nestjs/common';
+let module = `import { Module } from '@nestjs/common';
 // 自定义
 import { ${name} } from './${name}';
 
@@ -61,9 +59,8 @@ export class ${name}_module { }
 `
 
 
-let dto_create = `
+let dto_create = `import { ApiProperty } from "@nestjs/swagger";
 import { IsArray, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString, Length, Min } from "class-validator";
-import { ApiProperty } from "@nestjs/swagger";
 export class ${name}_create {
     @ApiProperty({ description: '默认名称', type: String, example: "默认名称" })
     @IsString()
@@ -73,9 +70,8 @@ export class ${name}_create {
 `
 
 
-let dto_delete = `
+let dto_delete = `import { ApiProperty } from "@nestjs/swagger";
 import { IsArray, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString, Length, Min } from "class-validator";
-import { ApiProperty } from "@nestjs/swagger";
 export class ${name}_delete {
     @ApiProperty({ description: 'id', type: Number, example: 0, })
     @IsNumber()
@@ -84,9 +80,8 @@ export class ${name}_delete {
 `
 
 
-let dto_update = `
+let dto_update = `import { ApiProperty } from "@nestjs/swagger";
 import { IsArray, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString, Length, Min } from "class-validator";
-import { ApiProperty } from "@nestjs/swagger";
 export class ${name}_update {
     @ApiProperty({ description: '默认名称', type: String, example: "默认名称" })
     @IsString()
@@ -95,9 +90,8 @@ export class ${name}_update {
 }
 `
 
-let dto_find = `
+let dto_find = `import { ApiProperty } from "@nestjs/swagger";
 import { IsArray, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString, Length, Min } from "class-validator";
-import { ApiProperty } from "@nestjs/swagger";
 export class ${name}_find {
     @ApiProperty({ description: '默认名称', type: String, example: "默认名称" })
     @IsString()
