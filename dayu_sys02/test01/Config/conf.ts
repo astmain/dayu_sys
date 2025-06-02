@@ -1,11 +1,16 @@
 export const conf = {
-    port: 3000,
-    title: "doc",
-    url: "http://127.0.0.1:3000/doc.html",
-    version: "0.0.1",
-    description: "接口文档",
 
-    // 静态资源路径
+    // 项目参数
+    project: {
+        port: 3000,
+        title: "大宇-后端接口",
+        version: "0.0.1",
+        url: "http://127.0.0.1:3000/doc.html",
+        description: "接口文档示例 http://127.0.0.1:3000/doc.html",
+    },
+
+
+    // 静态资参数
     files: {
         path: "../files",
         prefix: "/files",
