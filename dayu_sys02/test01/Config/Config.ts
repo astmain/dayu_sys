@@ -3,17 +3,18 @@ import {conf} from "./conf"
 import {swagger} from "./swagger"
 import {cors} from "./cors"
 import {files} from "./files"
-import {vali_dto} from "./vali_dto"
+
 import {useStaticAssets} from "./useStaticAssets"
-import {filter_error} from "./filter_error"
+import {filter_error_sys} from "./filter_error_sys"
+import {filter_error_dto} from "./filter_error_dto"
 
 export const Config = {
     conf,
     swagger,
     cors,
     files,
-    vali_dto,
-    filter_error,
+    filter_error_sys,
+    filter_error_dto,
     useStaticAssets,
 
 }

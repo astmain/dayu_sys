@@ -26,6 +26,6 @@ class AllExceptionsFilter implements ExceptionFilter {
 }
 
 
-export async function filter_error(app: any) {
+export async function filter_error_sys(app: any) {
     app.useGlobalFilters(new AllExceptionsFilter())
 }
