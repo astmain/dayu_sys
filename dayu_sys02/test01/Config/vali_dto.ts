@@ -1,10 +1,26 @@
-import {ValidationPipe} from "@nestjs/common";
+import {BadRequestException, ValidationError, ValidationPipe} from "@nestjs/common";
 
 
 export async function vali_dto(app) {
     app.useGlobalPipes(new ValidationPipe({
-        whitelist: true, // 删除 DTO 中未定义的属性
-        forbidNonWhitelisted: false, // 若传入未定义属性，抛出错误
-        transform: false, // 自动类型转换
+        whitelist: true,               // 删除 DTO 中未定义的属性
+        forbidNonWhitelisted: false,   // 若传入未定义属性，抛出错误
+        transform: false,              // 自动类型转换
+        exceptionFactory: (errors: ValidationError[]) => {
+            let errors_info = errors.flatMap((error) => {
+                let values = Object.values(error.constraints || {})
+                let result: any = []
+                values.map(msg => {
+                    // console.log(`222---msg:`, msg)
+                    result.push({field: error.property, value: error.value, msg})
+                })
+                return result
+            })
+
+            // console.log(`333---err_arr:`, errors_info)
+            let message = errors_info.map(o => o.msg).join(";");
+            const response = {code: 422, message: `失败:参数错误>${message}`, errors_info,}
+            return new BadRequestException(response);
+        }
     }));
 }
