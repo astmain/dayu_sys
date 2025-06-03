@@ -4,8 +4,14 @@ import {test1_module} from "./Controller/test1/test1_module"
 import {test2_module} from "./Controller/test2/test2_module"
 import {user2_module} from "./Controller/user2/user2_module"
 
+
+import {PrismaModule} from "./Orm/PrismaModule"
+
 @Module({
-    imports: [files_module, test1_module, test2_module, user2_module,],
+    imports: [
+        PrismaModule,
+        
+        files_module, test1_module, test2_module, user2_module,],
     controllers: [],
     providers: [],
 })
