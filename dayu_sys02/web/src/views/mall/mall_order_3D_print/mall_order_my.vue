@@ -5,6 +5,7 @@
     <div style="display:flex;gap: 20px">
       <div class="dom_container" @click="goods_order_find_list()">全部订单</div>
       <div class="dom_container">待支付订单</div>
+      <div class="dom_container">已取消订单</div>
       <div class="dom_container">已完成订单</div>
     </div>
 
