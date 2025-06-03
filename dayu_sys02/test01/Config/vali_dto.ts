@@ -12,6 +12,7 @@ export async function vali_dto(app) {
                 let result: any = []
                 values.map(msg => {
                     // console.log(`222---msg:`, msg)
+                    console.log(`222---error:`, error)
                     result.push({field: error.property, value: error.value, msg})
                 })
                 return result

@@ -54,9 +54,19 @@ export class files {
 
     @ApiOperation({summary: '删除-文件'})
     @Post("files_delete")
-    // @ApiConsumes('application/x-www-form-urlencoded')
-    @ApiConsumes('multipart/form-data')
+    @ApiConsumes('application/x-www-form-urlencoded') // ✅ 使用表单格式
     @ApiBody({type: dto.files_delete})
+
+    // @ApiBody({
+    //     schema: {
+    //         type: 'object',
+    //         required: ['email', 'password'], // ✅ 明确标记 name 为必填
+    //         properties: {
+    //             email: {type: 'string', example: 'test@example.com',},
+    //             password: {type: 'string', example: 'mypassword',},
+    //         }
+    //     }
+    // })
     files_delete(@Body() body: dto.files_delete, @Req() req: any) {
         console.log('_delete---body:', body)
         return {code: 200, message: "success"}
