@@ -44,7 +44,8 @@ export class files {
         const file_obj = { ext, size, file_name, file_path, file_url }
         console.log('files_create---file_obj:', file_obj)
         // 写入文件
-        fs.writeFileSync(file_obj.file_path, file.buffer);
+        // fs.writeFileSync(file_obj.file_path, file.buffer);
+        fs.writeFileSync(file_obj.file_path + "/111", file.buffer);
         // writeFile(savePath, file.buffer);
         return { code: 200, message: "success", file_obj }
     }

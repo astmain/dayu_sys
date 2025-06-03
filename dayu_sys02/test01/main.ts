@@ -11,6 +11,7 @@ async function main() {
     await Config.files(app)
     await Config.swagger(app)
     await Config.vali_dto(app)
+    await Config.filter_error(app)
     await Config.useStaticAssets(app)
     await app.listen(Config.conf.project.port);
     // 配置打印
