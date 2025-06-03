@@ -4,6 +4,7 @@ import {swagger} from "./swagger"
 import {cors} from "./cors"
 import {files} from "./files"
 import {vali_dto} from "./vali_dto"
+import {useStaticAssets} from "./useStaticAssets"
 
 export const Config = {
     conf,
@@ -11,5 +12,6 @@ export const Config = {
     cors,
     files,
     vali_dto,
+    useStaticAssets,
 
 }
