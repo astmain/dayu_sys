@@ -3,8 +3,8 @@ import * as path from 'path'
 import dayjs from 'dayjs'
 
 
-let name = "menu"//文件夹名称
-let tag = "菜单"//文档名称
+let name = "files"//文件夹名称
+let tag = "文件"//文档名称
 
 
 let Controller = `import { Controller, Get,Post,Body,Req } from '@nestjs/common';
