@@ -11,7 +11,7 @@ import {PrismaClient} from '@prisma/client';
 @ApiTags('测试3_装饰器-管理')
 @Controller('test3_dec')
 export class test3_dec {
-    constructor(@Inject("db_prisma") private db: PrismaClient,) {
+    constructor(@Inject("DB_prisma") private DB: PrismaClient) {
     }
 
     // @MyDecorator
@@ -47,7 +47,7 @@ export class test3_dec {
     @Post("test3_dec_find_list")
     async test3_dec_find_list(@Body() body: dto.test3_dec_find, @Req() req: any) {
         console.log('_find_list---body:', body)
-        let one = await this.db.tb_files.create({
+        let one = await this.DB.tb_files.create({
             data: {
                 ext: "png",
                 // size: req?.user?.id,
@@ -57,7 +57,7 @@ export class test3_dec {
                 file_url: "111.png",
             }
         })
-        let list = await this.db.tb_files.findMany()
+        let list = await this.DB.tb_files.findMany()
         return {code: 200, count: list.length, message: "success", list,}
     }
 }

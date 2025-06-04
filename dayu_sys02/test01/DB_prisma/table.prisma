@@ -9,7 +9,7 @@ datasource db {
   provider = "sqlite"
   // url      = "file:C:/db_dev_sqlited.db"
   // url      = "file:D:/db_dev_sqlited.db"
-  url      = "file:./db_dev_sqlited.db"
+  url      = "file:./sqlite.db"
 }
 
 model tb_files {

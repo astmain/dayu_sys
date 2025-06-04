@@ -12,26 +12,23 @@ interface Opt {
     //挂载模块
     imports: [],
     providers: [
-        {provide: "db_prisma", useValue: {db_prisma: prisma}},
+        {provide: "DB_prisma", useValue: prisma},
     ],
     exports: [
-        {provide: "db_prisma", useValue: {baseUrl: "/v1"}},
+        {provide: "DB_prisma", useValue: prisma},
     ],
 })
 
 
-export class db_prisma {
+export class DB_prisma {
     static make_path(opt: Opt): DynamicModule {
         let result = {
-            module: db_prisma,
+            module: DB_prisma,
             providers: [
-                {provide: "db_prisma", useValue: prisma},
+                {provide: "DB_prisma", useValue: prisma},
             ],
 
         }
-
-
         return result
-
     }
 }

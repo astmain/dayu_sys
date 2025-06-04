@@ -3,39 +3,19 @@ import {ApiTags, ApiOperation, ApiResponse, ApiQuery} from '@nestjs/swagger';
 import {ApiBearerAuth, ApiBody, ApiParam} from '@nestjs/swagger';
 // 自定义
 import * as dto from "./dto/dto"
-import {PrismaService} from "../../Orm/PrismaService";
+
 
 @ApiTags('测试2-管理')
 @Controller('test2')
 export class test2 {
-    constructor(private readonly prisma: PrismaService) {
+    constructor() {
     }
 
     @ApiOperation({summary: '新增-测试2'})
     @Post("test2_create")
     async test2_create(@Body() body: dto.test2_create, @Req() req: any) {
         console.log('_create---body:', body)
-
-        this.prisma.tb_files.findMany({where: {id: 1}})
-
-        // try {
-        let one = await this.prisma.tb_files.create({
-            data: {
-                ext: "png",
-                size: req?.user?.id,
-                // size: 111,
-                file_name: "111.png",
-                file_path: "111.png",
-                file_url: "111.png",
-            }
-        })
-        // } catch (error) {
-        //     console.log(`111---error:`, error)
-        // }
-
-
-        let list = await this.prisma.tb_files.findMany()
-        return {code: 200, message: "success", body, result: {list}}
+        return {code: 200, message: "success", body, result: {}}
     }
 
     @ApiOperation({summary: '删除-测试2'})
