@@ -1,11 +1,11 @@
 // 自定义
-import {conf} from "./conf"
-import {swagger} from "./swagger"
-import {cors} from "./cors"
-import {files_static} from "./files_static"
-import {filter_error_sys} from "./filter_error_sys"
-import {filter_error_dto} from "./filter_error_dto"
-import {filter_error_prisma} from "./filter_error_prisma"
+import {conf} from "@Config/conf"
+import {swagger} from "@Config/swagger"
+import {cors} from "@Config/cors"
+import {files_static} from "@Config/files_static"
+import {filter_error_sys} from "@Config/filter_error_sys"
+import {filter_error_dto} from "@Config/filter_error_dto"
+import {filter_error_prisma} from "@Config/filter_error_prisma"
 
 // 配置:函数
 export const Config = {
