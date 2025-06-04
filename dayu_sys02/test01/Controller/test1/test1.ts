@@ -1,5 +1,5 @@
 import {Controller, Post, Body, Req} from "@nestjs/common";
-import {ApiTags, ApiOperation} from "@nestjs/swagger";
+import {ApiTags, ApiOperation, ApiConsumes, ApiBody} from "@nestjs/swagger";
 // 自定义
 import * as dto from "./dto/dto";
 
@@ -8,8 +8,20 @@ import * as dto from "./dto/dto";
 export class test1 {
     @ApiOperation({summary: "新增-测试1"})
     @Post("test1_create")
+    @ApiConsumes('multipart/form-data')
+    // @ApiBody({
+    //     schema: {
+    //         type: 'object',
+    //         required: ['name', "age"],
+    //         properties: {
+    //             name: {description: '姓名', type: 'string',},
+    //             // age: {description: '年龄', type: 'number', example: 25},
+    //         },
+    //     },
+    // })
+    @ApiBody({ type: dto.test1_create })  // 👈 这就是你说的 @ApiBody
     test1_create(@Body() body: dto.test1_create, @Req() req: any) {
-        console.log("_create---body:", body, req);
+        console.log("_create---body:", body);
         return {code: 200, message: "success"};
     }
 
