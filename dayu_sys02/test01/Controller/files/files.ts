@@ -7,8 +7,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 // 自定义
 import * as dto from "./dto/dto"
-import { Config } from "../../Config/Config";
-import { conf } from "../../Config/conf";
+import { Config } from "@Config/Config";
+import { conf } from "@Config/conf";
 import { writeFile } from 'fs/promises';
 import * as dayjs from 'dayjs'
 
