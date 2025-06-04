@@ -1,6 +1,7 @@
 import {BadRequestException, ValidationError, ValidationPipe} from "@nestjs/common";
 
 
+// 拦截过滤器-dto验证
 export async function filter_error_dto(app) {
     app.useGlobalPipes(new ValidationPipe({
         whitelist: true,               // 删除 DTO 中未定义的属性

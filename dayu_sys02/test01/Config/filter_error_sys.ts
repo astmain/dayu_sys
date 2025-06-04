@@ -34,7 +34,7 @@ class AllExceptionsFilter implements ExceptionFilter {
     }
 }
 
-
+//配置:过滤器系统错误
 export async function filter_error_sys(app: any) {
     app.useGlobalFilters(new AllExceptionsFilter())
 }

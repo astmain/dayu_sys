@@ -3,7 +3,7 @@ import {knife4jSetup} from 'nest-knife4j';
 // 自定义
 import {conf} from './conf';
 
-
+//  配置:swagger文档nest-knife4j
 export async function swagger(app) {
     const config = new DocumentBuilder()
         .setTitle(conf.project.title)

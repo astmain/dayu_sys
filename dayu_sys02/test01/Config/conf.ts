@@ -27,7 +27,7 @@ import * as path from 'path';
 
 export const conf = make()
 
-
+// 配置参数
 function make() {
     let project = {
         port: 3000,

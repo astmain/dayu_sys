@@ -1,3 +1,4 @@
+//跨域配置
 export async function cors(app) {
     app.enableCors({
         origin: true,
