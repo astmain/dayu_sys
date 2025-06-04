@@ -16,6 +16,8 @@ export class test2 {
     async test2_create(@Body() body: dto.test2_create, @Req() req: any) {
         console.log('_create---body:', body)
 
+        this.prisma.tb_files.findMany({where: {id: 1}})
+
         // try {
         let one = await this.prisma.tb_files.create({
             data: {
