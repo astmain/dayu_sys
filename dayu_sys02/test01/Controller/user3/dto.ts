@@ -1,0 +1,38 @@
+import {ApiProperty, ApiPropertyOptional} from '@nestjs/swagger';
+import {IsString, IsOptional, IsNotEmpty, IsNumber, IsInt, Min} from 'class-validator';
+import {PartialType, PickType} from '@nestjs/swagger';
+
+export class user {
+    @ApiProperty({description: '姓名[必须是字符,不能未空]', example: '小许',})
+    @IsString({message: '姓名:必须是字符'})
+    @IsNotEmpty({message: '姓名:不能未空'})
+    name: string;
+
+    @ApiProperty({description: '年龄', example: 18,})
+    @IsInt({message: "年龄:必须是正整数"})
+    @Min(0, {message: '年龄:必须是大于等于0'})
+    age: string;
+
+    @ApiProperty({description: 'The email of the user', example: 'john.doe@example.com',})
+    @IsString({message: '邮箱:必须是字符'})
+    @IsNotEmpty({message: '邮箱:不能未空'})
+    email: string;
+
+    @ApiProperty({description: '密码', example: 's3cret!',})
+    @IsString()
+    @IsNotEmpty()
+    password: string;
+}
+
+// export class user_crreate extends PartialType(user) {
+// }
+
+// 集成全部字段
+export class create extends user {
+}
+
+// 继承部分字段
+export class find extends PickType(user, ['name', 'age']) {
+}
+
+//

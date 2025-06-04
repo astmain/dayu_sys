@@ -22,7 +22,8 @@ class AllExceptionsFilter implements ExceptionFilter {
             message = "异常:数据库>PrismaClientKnownRequestError"
         } else if (exception?.name?.includes("Prisma")) {
             message = "异常:数据库>Prisma"
-        } else {
+        }
+        else {
             message = "异常:错误>" + exception.message
         }
 

@@ -1,12 +1,12 @@
-import {Controller, Post, Body, UsePipes} from '@nestjs/common';
+import {Body, Controller, Post} from '@nestjs/common';
 import * as dto from "./dto"
 
 
-@Controller('user2')
-export class user2 {
+@Controller("user3")
+export class user3 {
 
     @Post()
-    create(@Body() user: dto.create) {
+    create(@Body() user: dto.find) {
         // 处理创建用户逻辑
         console.log(`111---body:`, user)
         return user
