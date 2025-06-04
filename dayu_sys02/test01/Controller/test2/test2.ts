@@ -17,16 +17,16 @@ export class test2 {
         console.log('_create---body:', body)
 
         // try {
-            let one = await this.prisma.tb_files.create({
-                data: {
-                    ext: "png",
-                    size: req?.user?.id,
-                    // size: 111,
-                    file_name: "111.png",
-                    file_path: "111.png",
-                    file_url: "111.png",
-                }
-            })
+        let one = await this.prisma.tb_files.create({
+            data: {
+                ext: "png",
+                size: req?.user?.id,
+                // size: 111,
+                file_name: "111.png",
+                file_path: "111.png",
+                file_url: "111.png",
+            }
+        })
         // } catch (error) {
         //     console.log(`111---error:`, error)
         // }

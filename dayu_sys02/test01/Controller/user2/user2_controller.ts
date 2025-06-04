@@ -1,13 +1,14 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get } from "@nestjs/common";
 
-@Controller('user2')
+@Controller("user2")
 export class user2_controller {
-    @Get()
-    getHello() {
-        return { code: 200, message: "success" }
-    }
-    @Get("aaa")
-    getHello2() {
-        return { code: 200, message: "success" }
-    }
+  @Get()
+  getHello() {
+    return { code: 200, message: "success" };
+  }
+
+  @Get("aaa")
+  getHello2() {
+    return { code: 200, message: "success" };
+  }
 }
