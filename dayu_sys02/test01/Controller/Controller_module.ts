@@ -5,6 +5,7 @@ import {test1_module} from "@Controller/test1/test1_module"
 import {test2_module} from "@Controller/test2/test2_module"
 import {user2_module} from "@Controller/user2/user2_module"
 import {test3_dec_module} from "@Controller/test3_dec/test3_dec"
+import {expressage_module} from "@Controller/expressage/expressage_module";
 
 
 @Module({
@@ -18,6 +19,9 @@ import {test3_dec_module} from "@Controller/test3_dec/test3_dec"
         test2_module,
 
         test3_dec_module,
+
+
+        expressage_module,
 
 
     ],
