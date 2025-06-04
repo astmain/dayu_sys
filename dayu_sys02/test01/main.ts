@@ -2,21 +2,21 @@ import {NestFactory} from '@nestjs/core';
 // 自定义
 import {Controller_module} from '@Controller/Controller_module';
 import {Config} from '@Config/Config';
-import {swagger_ui} from "@Config/swagger_ui";
 
 
 async function main() {
     const app = await NestFactory.create(Controller_module);
     // 配置插件
     await Config.cors(app)
-    // await Config.swagger_Knife4j(app)
-    await Config.swagger_ui(app)
+    await Config.swagger_Knife4j(app)
     await Config.files_static(app)
     await Config.filter_error_sys(app)
     await Config.filter_error_dto(app)
     await Config.filter_error_prisma(app)
     await app.listen(Config.conf.project.port);
     // 配置打印
+
+
     console.log(Config.conf.project.description)
     console.log(Config.conf.files.description)
 }
