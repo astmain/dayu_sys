@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    // 启用元数据发射
+    "emitDecoratorMetadata": true,
+    // 启用装饰器
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2023",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "noFallthroughCasesInSwitch": false,
+    //    自定义======================
+    "paths": {
+      "@Config/*": [
+        "Config/*"
+      ],
+      "@Controller/*": [
+        "Controller/*"
+      ]
+    },
+    "isolatedModules": true,
+    "moduleResolution": "node",
+    // 支持 ES6 模块与 CommonJS 互操作
+    "esModuleInterop": true,
+    // 包含 Reflect API 的类型定义
+    "lib": [
+      "ES6",
+      "DOM",
+      "ESNext"
+    ]
+
+
+
+    //视频代码    https://www.bilibili.com/video/BV1uEB4YFE43?spm_id_from=333.788.player.switch&vd_source=7c75d2128986ff3eb6425f362d305c25&p=22
+  }
+}
