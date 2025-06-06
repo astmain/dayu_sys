@@ -11,24 +11,23 @@ import {expressage_module} from "@Controller/expressage/expressage_module";
 
 @Module({
     imports: [
+        // 工具模块*******************************
         DB_prisma.make_path({path: "/app.json"}),
-
-        files_module,
+        // 路由模块*******************************
+        files_module,//文件管理
         user2_module,
         user3_module,
-
         test1_module,
         test2_module,
-
         test3_dec_module,
-
-
         expressage_module,
 
 
     ],
     controllers: [],
-    providers: [],
+    providers: [
+        // {provide: "test3_dec", useClass: test3_dec}
+    ],
 })
 export class Controller_module {
 
