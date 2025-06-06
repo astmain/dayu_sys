@@ -10,13 +10,13 @@ export async function swagger_Knife4j(app) {
         .setDescription(conf.project.description)
         .setVersion(conf.project.version)
         .addServer(conf.project.url, 'Local environment')
-        // .addGlobalParameters({
-        //     name: 'token',
-        //     in: 'header',
-        //     description: 'token',
-        //     required: true,
-        //     schema: {type: "string", default: "token",}
-        // })
+        .addGlobalParameters({
+            name: 'token',
+            in: 'header',
+            description: 'token',
+            required: true,
+            schema: {type: "string", default: "token11111111",}
+        })
         .build();
 
 

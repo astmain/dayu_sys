@@ -2,7 +2,7 @@ import {ApiProperty, ApiPropertyOptional} from '@nestjs/swagger';
 import {IsString, IsOptional, IsNotEmpty, IsNumber, IsInt, Min} from 'class-validator';
 import {PartialType, PickType} from '@nestjs/swagger';
 
-export class user {
+export class user3_dto {
     @ApiProperty({description: '姓名[必须是字符,不能未空]', example: '小许',})
     @IsString({message: '姓名:必须是字符'})
     @IsNotEmpty({message: '姓名:不能未空'})
@@ -33,15 +33,15 @@ export class user {
 // }
 
 
-export class create extends user {
+export class create extends user3_dto {
 }
 
 
-export class find extends PickType(user, ['name', 'age']) {
+export class find extends PickType(user3_dto, ['name', 'age']) {
 }
 
 
-export class del extends PickType(user, ['id']) {
+export class del extends PickType(user3_dto, ['id', "name"]) {
 }
 
 //

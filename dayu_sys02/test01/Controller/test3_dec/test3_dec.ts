@@ -7,7 +7,9 @@ import {MyDecorator} from "./MyDecorator"
 import {ApiPost} from "./ApiPost"
 
 import {PrismaClient} from '@prisma/client';
+import {SwaggerTag} from "@Config/SwaggerTag";
 
+@SwaggerTag("test-v")
 @ApiTags('测试3_装饰器-管理')
 @Controller('test3_dec')
 export class test3_dec {

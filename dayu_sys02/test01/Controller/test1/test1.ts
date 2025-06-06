@@ -2,7 +2,8 @@ import {Controller, Post, Body, Req} from "@nestjs/common";
 import {ApiTags, ApiOperation, ApiConsumes, ApiBody} from "@nestjs/swagger";
 // 自定义
 import * as dto from "./dto/dto";
-
+import {SwaggerTag} from "@Config/SwaggerTag";
+@SwaggerTag("test-v")
 @ApiTags("测试1-管理")
 @Controller("test1")
 export class test1 {
