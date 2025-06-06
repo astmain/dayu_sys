@@ -3,7 +3,7 @@ import * as path from 'path'
 import dayjs from 'dayjs'
 
 
-let name = "expressage"//文件夹名称
+let name = "express_info"//文件夹名称
 let tag = "快递管理"//文档名称
 
 

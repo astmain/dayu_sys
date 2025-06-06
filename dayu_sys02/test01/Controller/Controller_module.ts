@@ -6,7 +6,7 @@ import {test2_module} from "@Controller/test2/test2_module"
 import {user2_module} from "@Controller/user2/user2"
 import {user3_module} from "@Controller/user3/user3"
 import {test3_dec_module} from "@Controller/test3_dec/test3_dec"
-import {expressage_module} from "@Controller/expressage/expressage_module";
+import {expressage_module} from "@Controller/expressage/expressage_module"
 
 
 @Module({

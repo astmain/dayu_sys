@@ -1,13 +1,16 @@
 import {BadRequestException, ValidationError, ValidationPipe} from "@nestjs/common";
+import {NestApplication} from "@nestjs/core";
 
 
 // 拦截过滤器-dto验证
-export async function filter_error_dto(app) {
-    app.useGlobalPipes(new ValidationPipe({
+export async function filter_error_dto(app: NestApplication) {
+    let aaa = new ValidationPipe({
         whitelist: true,               // 删除 DTO 中未定义的属性
         forbidNonWhitelisted: false,   // 若传入未定义属性，抛出错误
         transform: false,              // 自动类型转换
-        exceptionFactory: (errors: ValidationError[]) => {
+        // exceptionFactory: (errors: ValidationError[]) => {
+        exceptionFactory: (errors) => {
+            let aaa = errors
             let errors_info = errors.flatMap((error) => {
                 let values = Object.values(error.constraints || {})
                 let result: any = []
@@ -24,5 +27,8 @@ export async function filter_error_dto(app) {
             const response = {code: 422, message: `失败:参数错误>${message}`, errors_info,}
             return new BadRequestException(response);
         }
-    }));
+    })
+
+
+    app.useGlobalPipes(aaa);
 }
