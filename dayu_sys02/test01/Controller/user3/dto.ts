@@ -6,6 +6,11 @@ export class user {
     @ApiProperty({description: '姓名[必须是字符,不能未空]', example: '小许',})
     @IsString({message: '姓名:必须是字符'})
     @IsNotEmpty({message: '姓名:不能未空'})
+    id: string;
+
+    @ApiProperty({description: '姓名[必须是字符,不能未空]', example: '小许',})
+    @IsString({message: '姓名:必须是字符'})
+    @IsNotEmpty({message: '姓名:不能未空'})
     name: string;
 
     @ApiProperty({description: '年龄', example: 18,})
@@ -27,12 +32,16 @@ export class user {
 // export class user_crreate extends PartialType(user) {
 // }
 
-// 集成全部字段
+
 export class create extends user {
 }
 
-// 继承部分字段
+
 export class find extends PickType(user, ['name', 'age']) {
+}
+
+
+export class del extends PickType(user, ['id']) {
 }
 
 //
