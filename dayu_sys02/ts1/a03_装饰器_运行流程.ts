@@ -1,7 +1,7 @@
 export {}
 
 
-function Echo(val) {
+function Echo(val: string) {
     return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
         console.log(val, target, propertyKey, descriptor)
 
