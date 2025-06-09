@@ -9,14 +9,11 @@ import {createZodDto, ZodValidationPipe} from 'nestjs-zod'
 class CreateUserDto extends createZodDto(CountrySchema) {
 }
 
-@UsePipes(ZodValidationPipe)
 @Controller('user2')
 export class user2 {
 
     @Post("create")
-    // create(@Body(new ZodValidationPipe(CountrySchema)) body) {
-    // create(@Body() body: CreateUserDto) {
-    @UsePipes(ZodValidationPipe)
+    // create(@Body(new ZodValidationPipe(CountrySchema)) body: CreateUserDto) {
     create(@Body() body: CreateUserDto) {
         // 处理创建用户逻辑
         console.log(`111---body:`, body)
