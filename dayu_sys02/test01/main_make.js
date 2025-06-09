@@ -149,18 +149,18 @@ async function make_module(dir_path) {
 }
 
 
-async function make_dto(dto_path) {
-    try {
-        await fs.writeFileSync(path.join(dto_path, `${name}_create.ts`), dto_create, 'utf8');
-        await fs.writeFileSync(path.join(dto_path, `${name}_delete.ts`), dto_delete, 'utf8');
-        await fs.writeFileSync(path.join(dto_path, `${name}_update.ts`), dto_update, 'utf8');
-        await fs.writeFileSync(path.join(dto_path, `${name}_find.ts`), dto_find, 'utf8');
-        await fs.writeFileSync(path.join(dto_path, `dto.ts`), dto, 'utf8');
-        console.log(`222-文件夹-dto-已成功创建！`)
-    } catch (err) {
-        console.error('创建文件夹时出错：', err);
-    }
-}
+// async function make_dto(dto_path) {
+//     try {
+//         await fs.writeFileSync(path.join(dto_path, `${name}_create.ts`), dto_create, 'utf8');
+//         await fs.writeFileSync(path.join(dto_path, `${name}_delete.ts`), dto_delete, 'utf8');
+//         await fs.writeFileSync(path.join(dto_path, `${name}_update.ts`), dto_update, 'utf8');
+//         await fs.writeFileSync(path.join(dto_path, `${name}_find.ts`), dto_find, 'utf8');
+//         await fs.writeFileSync(path.join(dto_path, `dto.ts`), dto, 'utf8');
+//         console.log(`222-文件夹-dto-已成功创建！`)
+//     } catch (err) {
+//         console.error('创建文件夹时出错：', err);
+//     }
+// }
 
 
 async function main_make() {

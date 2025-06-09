@@ -3,7 +3,7 @@ import {NestApplication} from "@nestjs/core";
 
 
 // 拦截过滤器-dto验证
-export async function filter_error_dto(app: NestApplication) {
+export async function filter_error_dto(app) {
     let aaa = new ValidationPipe({
         whitelist: true,               // 删除 DTO 中未定义的属性
         forbidNonWhitelisted: false,   // 若传入未定义属性，抛出错误

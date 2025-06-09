@@ -24,9 +24,9 @@ export function config_docs(app: any, AppModule, port: number) {
             existingTag.include.set(moduleRef.metatype.name, moduleRef.metatype);
         } else {
             let url_json = pinyin(`${tag.url}-json`, {toneType: "none", nonZh: 'consecutive', separator: '_',});
-            console.log(`111---url_json:`, url_json)
+            // console.log(`111---url_json:`, url_json)
 
-            console.log(`111---222:`, pinyin(`我的`, {toneType: "none", nonZh: 'consecutive', separator: '_',}))
+            // console.log(`111---222:`, pinyin(`我的`, {toneType: "none", nonZh: 'consecutive', separator: '_',}))
 
             tagObj.push({
                 // name: url_json,
@@ -52,7 +52,7 @@ export function config_docs(app: any, AppModule, port: number) {
 
         let url_json = pinyin(`${item.url}-json`, {toneType: "none", nonZh: 'consecutive', separator: '_',});
 
-        console.log(`222---url_json:`, url_json)
+        // console.log(`222---url_json:`, url_json)
         docs.push({
             // name: url_json,
             // url: url_json,

@@ -43,14 +43,14 @@ class Base {
 }
 
 
-export class user3_create extends OmitType(Base, ['id']) {
+export class user4_create extends OmitType(Base, ['id']) {
 }
 
-export class user3_del extends PickType(Base, ['id']) {
+export class user4_del extends PickType(Base, ['id']) {
 }
 
-export class user3_update extends Base {
+export class user4_update extends Base {
 }
 
-export class user3_find extends PickType(Base, ['name']) {
+export class user4_find extends PickType(Base, ['name']) {
 }
