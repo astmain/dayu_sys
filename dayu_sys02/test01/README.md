@@ -8,3 +8,6 @@ npm install -D prisma
 
 
 https://3rcd.com/wiki/decorator/
+
+
+帮我在项目中集成typeorm  

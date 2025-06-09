@@ -7,6 +7,7 @@ import {test1_module} from "@Controller/test1/test1"
 import {user2_module} from "@Controller/user2/user2"
 import {user3_module} from "@Controller/user3/user3"
 import {user4_module} from "@Controller/user4/user4";
+import {orm1_module} from "@Controller/orm1/orm1";
 
 
 @Module({
@@ -22,6 +23,9 @@ import {user4_module} from "@Controller/user4/user4";
         user2_module,
         user3_module,
         user4_module,
+
+        //orm
+        orm1_module,
 
 
     ],
