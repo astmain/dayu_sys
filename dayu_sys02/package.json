@@ -8,6 +8,7 @@
     "end": "pnpm    --filter end      dev",
     "测试项目": "==========================================================",
     "test01": "pnpm    --filter test01      dev",
+    "demo1": "pnpm    --filter demo1      dev",
     "pnpm操作": "==========================================================",
     "pnpm安装": "pnpm i",
     "pnpm清除缓存": "pnpm store prune",

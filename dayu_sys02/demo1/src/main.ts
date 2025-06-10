@@ -16,8 +16,7 @@ async function bootstrap() {
   await app.listen(process.env.PORT ?? 3000);
   console.log(`
     启动成功
-    API: http://127.0.0.1:${process.env.PORT ?? 3000}
-    API文档: http://127.0.0.1:${process.env.PORT ?? 3000}/doc.html
+    swagger_Knife4j文档: http://127.0.0.1:${process.env.PORT ?? 3000}/doc.html
     
     `);
 }
