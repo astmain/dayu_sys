@@ -15,43 +15,43 @@ import {User} from "@Controller/users/entities/user.entity"
 import {createConnection} from "typeorm";
 
 
-console.log(`111---222:`, __dirname + '/**/*.entity{.ts,.js}')
-createConnection({
-    type: 'sqlite',
-    database: 'db.sqlite',
-    entities: [__dirname + '/**/*.entity{.ts,.js}'],
-    synchronize: true,
-    logging: true,
-}).then(connection => {
-    console.log('数据库连接成功');
-}).catch(error => {
-    console.error('数据库连接失败', error);
-});
+// console.log(`111---222:`, __dirname + '/**/*.entity{.ts,.js}')
+// createConnection({
+//     type: 'sqlite',
+//     database: 'db.sqlite',
+//     entities: [__dirname + '/**/*.entity{.ts,.js}'],
+//     synchronize: true,
+//     logging: true,
+// }).then(connection => {
+//     console.log('数据库连接成功');
+// }).catch(error => {
+//     console.error('数据库连接失败', error);
+// });
 
 //nestjs 使用typeorm 初始化sqlite 数据库 并链接
 @Module({
     imports: [
-        TypeOrmModule.forRoot({
-            type: 'sqlite',
-            database: 'db.sqlite',
-            // entities: [__dirname + '/**/*.entity{.ts,.js}'],
-            entities: [User],
-            synchronize: true, // 开发环境使用，生产环境建议关闭
-            logging: true,
-
-            //
-            // type: 'sqlite',
-            // database: 'db.sqlite',
-            // // entities: [__dirname + '/**/*.entity{.ts,.js}'],
-            // entities: ["E:\\AAA\\dayu_sys\\dayu_sys02\\test01\\Controller\\users\\entities\\user.entity.ts"],
-            // synchronize: true, // 开发环境使用，生产环境建议关闭
-            // logging: true,
-
-            // type: 'sqlite',
-            // database: 'db.sql',
-            // autoLoadEntities: true,
-            // synchronize: true,
-        }),
+        // TypeOrmModule.forRoot({
+        //     type: 'sqlite',
+        //     database: 'db.sqlite',
+        //     // entities: [__dirname + '/**/*.entity{.ts,.js}'],
+        //     entities: [User],
+        //     synchronize: true, // 开发环境使用，生产环境建议关闭
+        //     logging: true,
+        //
+        //     //
+        //     // type: 'sqlite',
+        //     // database: 'db.sqlite',
+        //     // // entities: [__dirname + '/**/*.entity{.ts,.js}'],
+        //     // entities: ["E:\\AAA\\dayu_sys\\dayu_sys02\\test01\\Controller\\users\\entities\\user.entity.ts"],
+        //     // synchronize: true, // 开发环境使用，生产环境建议关闭
+        //     // logging: true,
+        //
+        //     // type: 'sqlite',
+        //     // database: 'db.sql',
+        //     // autoLoadEntities: true,
+        //     // synchronize: true,
+        // }),
 
 
         // 工具模块*******************************
