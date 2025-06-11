@@ -3,8 +3,8 @@ import * as path from 'path'
 import dayjs from 'dayjs'
 
 
-let name = "orm1"//文件夹名称
-let tag = "数据库1"//文档名称
+let name = "orm2"//文件夹名称
+let tag = "数据库2"//文档名称
 
 
 let Controller = `import { Controller, Module,Get,Post,Body,Req } from '@nestjs/common';
@@ -15,29 +15,29 @@ import {ApiPost} from "@Config/ApiPost";
 import * as dto from "./${name}_dto"
 @ApiTags('${tag}-管理')
 @Controller('${name}')
-class ${name} {
+export class ${name} {
     @ApiPost("create","新增-${tag}")
-    create(@Body() body: dto.${name}_create, @Req() req: any) {
-        console.log('_create---body:', body)
+    create(@Body() _body: dto.create_${name}, @Req() _req: any) {
+        // console.log('_create---_body:', _body)
         return { code: 200, message: "success" }
     }
 
 
     @ApiPost("del","删除-${tag}")
-    del(@Body() body: dto.${name}_del, @Req() req: any) {
-        console.log('_delete---body:', body)
+    del(@Body() _body: dto.del_${name}, @Req() _req: any) {
+        // console.log('_create---_body:', _body)
         return { code: 200, message: "success" }
     }
 
     @ApiPost("update","更新-${tag}")
-    update(@Body() body: dto.${name}_update, @Req() req: any) {
-        console.log('_update---body:', body)
+    update(@Body() body: dto.update_${name}, @Req() _req: any) {
+        // console.log('_create---_body:', _body)
         return { code: 200, message: "success" }
     }
 
-    @ApiPost("find_list","查询-${tag}-列表")
-    find_list(@Body() body: dto.${name}_find, @Req() req: any) {
-        console.log('_find_list---body:', body)
+    @ApiPost("findListAll","查询-${tag}-列表")
+    findListAll(@Body() _body: dto.find_${name}, @Req() _req: any) {
+        // console.log('_create---_body:', _body)
         return { code: 200, message: "success" }
     }
 }
@@ -96,10 +96,10 @@ class Base {
 }
 
 
-export class ${name}_create extends OmitType(Base, ['id']) {}
-export class ${name}_del extends PickType(Base, ['id']) {}
-export class ${name}_update extends Base {}
-export class ${name}_find extends PickType(Base, ['name']) {}
+export class create_${name} extends OmitType(Base, ['id']) {}
+export class del_${name} extends PickType(Base, ['id']) {}
+export class update_${name} extends Base {}
+export class find_${name} extends PickType(Base, ['name']) {}
 
 `
 
@@ -108,12 +108,12 @@ async function make_dir() {
     try {
         const dirName = `new_${name}__` + dayjs().format('YYYY-MM-DD-HH-mm-ss');
         const dir_path = path.join(process.cwd(), dirName, name);
-        fs.mkdirSync(dir_path, {recursive: true});
-        fs.mkdirSync(path.join(process.cwd(), dirName, "demo"), {recursive: true});
+        fs.mkdirSync(dir_path, { recursive: true });
+        fs.mkdirSync(path.join(process.cwd(), dirName, "demo"), { recursive: true });
         console.log('dir_path---:', dir_path)
 
         console.log(`111-文件夹-已成功创建！`);
-        return {dir_path};
+        return { dir_path };
     } catch (err) {
         console.error('创建文件夹时出错：', err);
     }
@@ -142,7 +142,7 @@ async function make_dto(dto_path) {
 
 
 async function main_make() {
-    let {dir_path} = await make_dir()
+    let { dir_path } = await make_dir()
     await make_Controller(dir_path)
     await make_dto(dir_path)
 }

@@ -1,11 +1,11 @@
 import { TypeOrmModule } from '@nestjs/typeorm';
 // 引入实体
 import * as orm1_dto from '@Controller/orm1/orm1_dto';
-import * as test1_dto from '@Controller/test1/test1.entity';
+import * as dto_111 from '@Controller/restfull01/tb_restfull01';
 
 
-const entities=[
-    test1_dto.tb_test1,
+const entities = [
+    dto_111.tb_restfull01,
     orm1_dto.tb_orm1
 ]
 

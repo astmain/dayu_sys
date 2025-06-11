@@ -2,7 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 import { IsString, IsNumber, IsOptional, IsNotEmpty, IsInt, Min, IsMobilePhone, IsIn } from 'class-validator';
 import { ApiProperty, OmitType, PickType } from "@nestjs/swagger";
 @Entity()
-export class tb_test1 {
+export class tb_restfull01 {
   @PrimaryGeneratedColumn()
   @ApiProperty({ description: 'id', example: 18 })
   @IsInt({ message: "id:必须是正整数" })
@@ -20,12 +20,12 @@ export class tb_test1 {
   @IsInt({ message: "年龄:必须是正整数" })
   @Min(0, { message: '年龄:必须是大于等于0' })
   age: number;
-} 
+}
 
 
 
 
-export class tb_test1_create extends OmitType(tb_test1, ['id']) {}
-export class tb_test1_del extends PickType(tb_test1, ['id']) {}
-export class tb_test1_update extends tb_test1 {}
-export class tb_test1_find extends PickType(tb_test1, ['name']) {}
+export class create_tb_restfull01 extends OmitType(tb_restfull01, ['id']) { }
+export class del_tb_restfull01 extends PickType(tb_restfull01, ['id']) { }
+export class update_tb_restfull01 extends tb_restfull01 { }
+export class find_tb_restfull01 extends PickType(tb_restfull01, ['name']) { }

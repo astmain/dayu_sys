@@ -1,28 +1,28 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { tb_test1 } from './test1.entity';
+import * as dto from "./tb_restfull01"
 
 @Injectable()
 export class Test1Service {
   constructor(
-    @InjectRepository(tb_test1)
-    private test1Repository: Repository<tb_test1>,
+    @InjectRepository(dto.tb_restfull01)
+    private test1Repository: Repository<dto.tb_restfull01>,
   ) { }
 
   // 创建记录
-  async create(data: Partial<tb_test1>): Promise<tb_test1> {
+  async create(data: Partial<dto.tb_restfull01>): Promise<dto.tb_restfull01> {
     const test1 = this.test1Repository.create(data);
     return await this.test1Repository.save(test1);
   }
 
   // 查找所有记录
-  async findAll(): Promise<tb_test1[]> {
+  async findAll(): Promise<dto.tb_restfull01[]> {
     return await this.test1Repository.find();
   }
 
   // 根据ID查找记录
-  async findOne(id: number): Promise<tb_test1> {
+  async findOne(id: number): Promise<dto.tb_restfull01> {
     const test1 = await this.test1Repository.findOne({ where: { id } });
     if (!test1) {
       throw new NotFoundException(`Test1 with ID ${id} not found`);
@@ -31,7 +31,7 @@ export class Test1Service {
   }
 
   // 更新记录
-  async update(id: number, data: Partial<tb_test1>): Promise<tb_test1> {
+  async update(id: number, data: Partial<dto.tb_restfull01>): Promise<dto.tb_restfull01> {
     await this.test1Repository.update(id, data);
     const updated = await this.test1Repository.findOne({ where: { id } });
     if (!updated) {

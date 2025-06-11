@@ -26,9 +26,7 @@ export class orm1 {
     @ApiPost("create", "新增-数据库1")
     async create(@Body() body: dto.orm1_create, @Req() req: any) {
         console.log('_create---body:', body)
-
         await this.db.save(body)
-
         return { code: 200, message: "success" }
     }
 
@@ -45,8 +43,8 @@ export class orm1 {
         return { code: 200, message: "success" }
     }
 
-    @ApiPost("find_list", "查询-数据库1-列表")
-    find_list(@Body() body: dto.orm1_find, @Req() req: any) {
+    @ApiPost("findListALl", "查询-数据库1-列表")
+    findListALl(@Body() body: dto.orm1_find, @Req() req: any) {
         console.log('_find_list---body:', body)
         return { code: 200, message: "success" }
     }

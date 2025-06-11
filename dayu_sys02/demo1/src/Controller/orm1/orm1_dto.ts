@@ -5,7 +5,7 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class tb_orm1 {
     @PrimaryGeneratedColumn()
-    @ApiProperty({ description: 'id', example: 18 })
+    @ApiProperty({ description: '数据库表的唯一id', example: 18 })
     @IsInt({ message: "id:必须是正整数" })
     @Min(0, { message: 'id:必须是大于等于0' })
     id: number;
@@ -51,7 +51,8 @@ export class tb_orm1 {
 }
 
 
-export class orm1_create extends OmitType(tb_orm1, ['id']) { }
+// export class orm1_create extends OmitType(tb_orm1, ['id']) { }
+export class orm1_create extends PickType(tb_orm1, ['id', "name"]) { }
 export class orm1_del extends PickType(tb_orm1, ['id']) { }
 export class orm1_update extends tb_orm1 { }
 export class orm1_find extends PickType(tb_orm1, ['name']) { }
