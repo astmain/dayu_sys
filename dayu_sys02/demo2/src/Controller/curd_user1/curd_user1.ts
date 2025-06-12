@@ -37,7 +37,6 @@ export class curd_user1 {
 
     @ApiPost("save", "保存-新增-更新-用户-id严格模式")
     async save(@Body() data: dto.save_curd_user1, @Req() _req: any) {
-        console.log(`222---:`, JSON.stringify(data, null, 2))
         // 判断手机号码是否被注册过
         const exit_count = await this.db.tb_curd_user1.findFirst({ where: { tel: data.tel } });
         console.log(`exit_count---:`, JSON.stringify(exit_count, null, 2))
