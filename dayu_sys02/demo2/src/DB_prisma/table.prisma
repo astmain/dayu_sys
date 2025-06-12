@@ -1,0 +1,32 @@
+// D:\AAA\dayu_system_01\api_end\prisma\dev.db           公司
+// E:\AAA\dayu_system\dayu02_end\prisma\dev.db           在家
+// E:\AAA\dayu_sys\dayu_sys02\demo2\src\DB_prisma\sqlite.db          在家
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  // url      = "file:C:/db_dev_sqlited.db"
+  // url      = "file:D:/db_dev_sqlited.db"
+  url      = "file:./sqlite.db"
+}
+
+model tb_files {
+  id        Int      @id @default(autoincrement())
+  ext       String
+  size      Int
+  file_name String
+  file_path String
+  file_url  String
+  createdAt DateTime @default(now())
+}
+
+model tb_curd_user1 {
+  id       Int    @id @default(autoincrement())
+  name     String @default("")
+  password String @default("123456")
+  tel      String @unique
+  remark   String @default("")
+}
