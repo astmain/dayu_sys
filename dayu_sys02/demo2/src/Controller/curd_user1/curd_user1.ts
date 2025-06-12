@@ -35,7 +35,7 @@ export class curd_user1 {
         return { code: 200, message: "成功:查询-用户-列表", form: data, user_list, }
     }
 
-    @ApiPost("save", "保存-新增-更新-用户")
+    @ApiPost("save", "保存-新增-更新-用户-id严格模式")
     async save(@Body() data: dto.save_curd_user1, @Req() _req: any) {
         console.log(`222---:`, JSON.stringify(data, null, 2))
         // 判断手机号码是否被注册过
