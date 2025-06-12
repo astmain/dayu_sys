@@ -3,8 +3,8 @@ import * as path from 'path'
 import dayjs from 'dayjs'
 
 
-let name = "orm2"//文件夹名称
-let tag = "数据库2"//文档名称
+let name = "user"//文件夹名称
+let tag = "用户管理"//文档名称
 
 
 let Controller = `import { Controller, Module,Get,Post,Body,Req } from '@nestjs/common';
@@ -87,6 +87,10 @@ class Base {
     @IsString({message: '邮箱:必须是字符'})
     @IsNotEmpty({message: '邮箱:不能未空'})
     email: string;
+
+    @ApiProperty({description: '备注[必须是字符,不能未空]', example: '备注',})
+    @IsString({message: '备注:必须是字符'})
+    remark: string;
 
     @ApiProperty({description: '分类', example: '个人'})
     @IsString()

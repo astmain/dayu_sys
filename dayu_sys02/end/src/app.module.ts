@@ -58,8 +58,6 @@ import {goods_order_Module} from "./Controller/goods_order/goods_order_Module";
         // tool_Module.make_path({path: "/app.json"}),
 
 
-
-
     ],
     controllers: [appController],
     providers: [Service_app, Service_test],

@@ -1,18 +1,18 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { swagger_Knife4j } from './Config/swagger_Knife4j';
 
+// 自定义
+import { Config } from '@Config/Config';
 
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-
-
-  await swagger_Knife4j(app)
-
-
-
-
+  // 配置插件
+  await Config.swagger_Knife4j(app)
+  await Config.filter_cors(app)
+  await Config.filter_error_sys(app)
+  await Config.filter_error_dto(app)
+  
   await app.listen(process.env.PORT ?? 3000);
   console.log(`
     启动成功
