@@ -40,6 +40,7 @@
     "lodash": "4.17.21",
     "mysql2": "^3.14.1",
     "nest-knife4j": "^1.0.1",
+    "prisma-class-generator": "^0.2.11",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
     "sqlite3": "^5.1.7",
