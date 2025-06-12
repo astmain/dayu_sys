@@ -5,7 +5,7 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class tb_orm1 {
     @PrimaryGeneratedColumn()
-    @ApiProperty({ description: '数据库表的唯一id', example: 18 })
+    @ApiProperty({ description: '数据库表的唯一id1111111', example: 111 })
     @IsInt({ message: "id:必须是正整数" })
     @Min(0, { message: 'id:必须是大于等于0' })
     id: number;

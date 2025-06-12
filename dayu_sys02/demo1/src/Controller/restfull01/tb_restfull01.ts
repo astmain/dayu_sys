@@ -5,7 +5,7 @@ import { ApiProperty, OmitType, PickType } from "@nestjs/swagger";
 export class tb_restfull01 {
   @PrimaryGeneratedColumn()
   @ApiProperty({ description: 'id', example: 18 })
-  @IsInt({ message: "id:必须是正整数" })
+  @IsInt({ message: 'id:必须是正整数' })
   @Min(0, { message: 'id:必须是大于等于0' })
   id: number;
 
@@ -17,7 +17,7 @@ export class tb_restfull01 {
 
   @Column()
   @ApiProperty({ description: '年龄', example: 18 })
-  @IsInt({ message: "年龄:必须是正整数" })
+  @IsInt({ message: '年龄:必须是正整数' })
   @Min(0, { message: '年龄:必须是大于等于0' })
   age: number;
 }
