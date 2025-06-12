@@ -11,7 +11,7 @@ import { db_typeorm } from './db_typeorm';
     imports: [
         db_typeorm.conn,
         db_typeorm.db,
-        restfull01_module,
+        // restfull01_module,
     ],
     controllers: [
         orm1, 
