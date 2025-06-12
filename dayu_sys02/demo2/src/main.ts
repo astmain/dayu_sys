@@ -1,18 +1,17 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
 
 // 自定义
+import { main_module } from './main_module';
 import { Config } from '@Config/Config';
 
-
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(main_module);
   // 配置插件
   await Config.swagger_Knife4j(app)
   await Config.filter_cors(app)
   await Config.filter_error_sys(app)
   await Config.filter_error_dto(app)
-  
+
   await app.listen(process.env.PORT ?? 3000);
   console.log(`
     启动成功

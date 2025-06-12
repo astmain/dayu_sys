@@ -6,7 +6,7 @@ import { PrismaClient } from '@prisma/client';
 // 自定义
 import * as dto from "./curd_user1_dto"
 import { ApiPost } from "@Config/ApiPost";
-@ApiTags('用户管理-管理')
+@ApiTags('增删改查测试curd_user1')
 @Controller('curd_user1')
 export class curd_user1 {
     constructor(@Inject("DB_prisma") private db: PrismaClient,) { }
@@ -64,7 +64,7 @@ export class curd_user1 {
     controllers: [curd_user1],
     providers: [],
 })
-export class user_module {
+export class curd_user1_module {
 }
 
 

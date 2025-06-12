@@ -7,7 +7,7 @@ import { restfull01_module } from '@Controller/restfull01/restfull01_module';
 // 引入数据库
 import { db_typeorm } from './db_typeorm';
 import { DB_prisma } from './DB_prisma/DB_prisma';
-import { user_module } from './Controller/curd_user1/curd_user1';
+import { curd_user1_module } from './Controller/curd_user1/curd_user1';
 
 @Module({
     imports: [
@@ -21,7 +21,7 @@ import { user_module } from './Controller/curd_user1/curd_user1';
         db_typeorm.db,
 
         // 路由模块*******************************
-        user_module,
+        curd_user1_module,
 
 
 
@@ -31,5 +31,5 @@ import { user_module } from './Controller/curd_user1/curd_user1';
         orm2,
     ],
 })
-export class AppModule {
+export class main_module {
 }
