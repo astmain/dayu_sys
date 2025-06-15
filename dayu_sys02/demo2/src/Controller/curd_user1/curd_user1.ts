@@ -57,6 +57,18 @@ export class curd_user1 {
             return { code: 200, message: `成功:新增-用户`, form: data, user_one, }
         }
     }
+
+    @ApiPost("upsert", "保存-新增-更新-用户-id严格模式")
+    async upsert(@Body() data: dto.save_curd_user1, @Req() _req: any) {
+        let one = await this.db.tb_curd_user1.upsert({
+            where: { tel: data.tel },
+            create: data,
+            update: data,
+        })
+        return { code: 200, message: `成功:保存-新增-更新-用户-id严格模式`, form: data, one }
+    }
+
+
 }
 
 @Module({

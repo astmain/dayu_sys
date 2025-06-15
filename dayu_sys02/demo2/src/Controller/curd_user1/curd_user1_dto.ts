@@ -12,8 +12,6 @@ class Base {
     @IsNotEmpty({ message: '姓名:不能未空' })
     name: string;
 
-
-
     @ApiProperty({ description: '密码', example: '123456', })
     @IsString({ message: '密码:必须是字符' })
     @IsNotEmpty({ message: '密码:不能未空' })
@@ -24,7 +22,6 @@ class Base {
     @IsNotEmpty({ message: '手机:不能未空' })
     @IsMobilePhone('zh-CN', {}, { message: '手机-格式不正确' })
     tel: string;
-
 
     @ApiProperty({ description: '备注[必须是字符,不能未空]', example: '备注', })
     @IsString({ message: '备注:必须是字符' })
